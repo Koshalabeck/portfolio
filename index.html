@@ -28,13 +28,10 @@
     cursor: none;
   }
 
-  /* custom cursor + trail */
   .cursor-dot {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
+    top: 0; left: 0;
+    width: 8px; height: 8px;
     background: #a5b4fc;
     border-radius: 50%;
     pointer-events: none;
@@ -45,17 +42,14 @@
   }
 
   .cursor-dot.hover {
-    width: 18px;
-    height: 18px;
+    width: 18px; height: 18px;
     background: #c4b5fd;
   }
 
   .cursor-ring {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
+    top: 0; left: 0;
+    width: 32px; height: 32px;
     border: 1.5px solid rgba(165, 180, 252, 0.5);
     border-radius: 50%;
     pointer-events: none;
@@ -65,8 +59,7 @@
   }
 
   .cursor-ring.hover {
-    width: 48px;
-    height: 48px;
+    width: 48px; height: 48px;
     border-color: rgba(196, 181, 253, 0.7);
   }
 
@@ -80,19 +73,14 @@
 
   #matrix {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: 0;
     opacity: 0.16;
     pointer-events: none;
   }
 
-  .content {
-    position: relative;
-    z-index: 1;
-  }
+  .content { position: relative; z-index: 1; }
 
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
@@ -116,16 +104,50 @@
     letter-spacing: -0.02em;
   }
 
+  nav .right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   nav .links a {
     color: var(--muted);
     font-size: 0.9rem;
-    margin-left: 20px;
+    margin-left: 18px;
     transition: color 0.2s;
   }
 
   nav .links a:hover {
     color: var(--text);
     text-decoration: none;
+  }
+
+  .lang-switch {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-left: 18px;
+  }
+
+  .lang-switch button {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    cursor: none;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .lang-switch button.active {
+    background: var(--accent);
+    color: #09090b;
+  }
+
+  .lang-switch button:hover:not(.active) {
+    color: var(--text);
   }
 
   .hero {
@@ -149,7 +171,7 @@
   }
 
   .hero h1 {
-    font-size: clamp(2.3rem, 6vw, 3.2rem);
+    font-size: clamp(2.2rem, 5.5vw, 3rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.15;
@@ -333,15 +355,13 @@
   }
 
   @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 560px) {
-    nav { padding: 13px 18px; }
-    nav .links a { margin-left: 14px; font-size: 0.85rem; }
+    nav { padding: 13px 16px; }
+    nav .links a { margin-left: 12px; font-size: 0.82rem; }
+    .lang-switch { margin-left: 10px; }
     .hero { padding: 115px 18px 60px; }
     section { padding: 45px 18px; }
     body { cursor: auto; }
@@ -360,46 +380,52 @@
 
 <nav>
   <div class="logo">КИ</div>
-  <div class="links">
-    <a href="#about">обо мне</a>
-    <a href="#projects">проекты</a>
-    <a href="#goals">цели</a>
-    <a href="#contact">связь</a>
+  <div class="right">
+    <div class="links">
+      <a href="#about" data-i18n="nav_about">обо мне</a>
+      <a href="#projects" data-i18n="nav_projects">проекты</a>
+      <a href="#goals" data-i18n="nav_goals">цели</a>
+      <a href="#contact" data-i18n="nav_contact">связь</a>
+    </div>
+    <div class="lang-switch">
+      <button id="btn-ru" class="active" onclick="setLang('ru')">RU</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
   </div>
 </nav>
 
 <div class="hero">
-  <div class="hero-badge">Москва</div>
-  <h1>Ивахненко Кирилл Дмитриевич</h1>
-  <p>
+  <div class="hero-badge" data-i18n="badge">Москва</div>
+  <h1 data-i18n="name">Ивахненко Кирилл Дмитриевич</h1>
+  <p data-i18n="hero_text">
     Занимаюсь Python и разработкой под экосистему Apple.<br>
     Делаю свои проекты, участвую в хакатонах и ищу интересную работу.
   </p>
   <div class="btns">
-    <a class="btn primary" href="#projects">Смотреть проекты</a>
+    <a class="btn primary" href="#projects" data-i18n="btn_projects">Смотреть проекты</a>
     <a class="btn" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
   </div>
 </div>
 
 <section id="about" class="reveal">
-  <h2>О себе</h2>
-  <p>
+  <h2 data-i18n="about_title">О себе</h2>
+  <p data-i18n="about_p1">
     Живу в Москве. Последнее время плотно сижу в Python — пишу ботов, скрипты,
     пробую небольшой бэкенд. Параллельно изучаю Swift и SwiftUI, потому что хочу
     нормально разрабатывать приложения сразу под несколько платформ Apple:
     iPhone, iPad, Mac и Apple TV.
   </p>
-  <p>
+  <p data-i18n="about_p2">
     Мне нравится, когда то, что пишешь, действительно помогает. Поэтому один из
     проектов, которым занимаюсь дольше остальных — приложение для людей с диабетом.
     Пока оно на Android, но думаю и про версии под Apple.
   </p>
-  <p>
+  <p data-i18n="about_p3">
     В свободное время играю в компьютерных клубах, занимаюсь музыкой и моушен-графикой.
     Участвую в тендерах, люблю работать со студентами — объяснять, разбирать задачи
     и смотреть, как человек начинает понимать.
   </p>
-  <p>
+  <p data-i18n="about_p4">
     Хакатоны воспринимаю как хороший способ быстро прокачаться и познакомиться
     с людьми. Уже участвовал в нескольких онлайн-форматах. Сейчас хочу найти
     команду и попробовать что-то офлайн в Москве.
@@ -407,7 +433,7 @@
 </section>
 
 <section class="reveal">
-  <h2>Чем занимаюсь</h2>
+  <h2 data-i18n="skills_title">Чем занимаюсь</h2>
   <div class="skills">
     <div class="skill">Python</div>
     <div class="skill">Swift</div>
@@ -417,22 +443,22 @@
     <div class="skill">Git</div>
     <div class="skill">aiogram</div>
     <div class="skill">HTML / CSS / JS</div>
-    <div class="skill">Моушен-графика</div>
-    <div class="skill">Музыка</div>
+    <div class="skill" data-i18n="skill_motion">Моушен-графика</div>
+    <div class="skill" data-i18n="skill_music">Музыка</div>
   </div>
-  <p style="margin-top: 22px;">
+  <p style="margin-top: 22px;" data-i18n="skills_note">
     Основное внимание сейчас уделяю Python и Swift. Kotlin использую в текущем
     pet-проекте. Остальное — по необходимости и интересам.
   </p>
 </section>
 
 <section id="projects" class="reveal">
-  <h2>Проекты</h2>
+  <h2 data-i18n="projects_title">Проекты</h2>
 
   <div class="project">
-    <h3>Приложение для контроля диабета</h3>
-    <div class="meta">Android · Kotlin · pet-проект</div>
-    <p>
+    <h3 data-i18n="proj1_title">Приложение для контроля диабета</h3>
+    <div class="meta" data-i18n="proj1_meta">Android · Kotlin · pet-проект</div>
+    <p data-i18n="proj1_desc">
       Делаю инструмент, который помогает следить за глюкозой и инсулином.
       Есть быстрый ввод данных, поддержка Libre и Medtronic, простые графики.
       Пишу в первую очередь для себя, но стараюсь делать так, чтобы им было
@@ -446,9 +472,9 @@
   </div>
 
   <div class="project">
-    <h3>Telegram-бот для учёта расходов</h3>
+    <h3 data-i18n="proj2_title">Telegram-бот для учёта расходов</h3>
     <div class="meta">Python · aiogram</div>
-    <p>
+    <p data-i18n="proj2_desc">
       Бот, в который просто пишешь сумму и категорию. В конце месяца можно
       посмотреть, куда ушли деньги. Хранение в SQLite, без лишней сложности.
       Пользуюсь сам.
@@ -461,9 +487,9 @@
   </div>
 
   <div class="project">
-    <h3>Трекер привычек</h3>
-    <div class="meta">SwiftUI · в процессе</div>
-    <p>
+    <h3 data-i18n="proj3_title">Трекер привычек</h3>
+    <div class="meta" data-i18n="proj3_meta">SwiftUI · в процессе</div>
+    <p data-i18n="proj3_desc">
       Небольшое приложение, через которое учу SwiftUI, навигацию и работу с данными.
       Хочу сделать так, чтобы оно нормально работало не только на iPhone,
       но и на iPad и Mac.
@@ -476,9 +502,9 @@
   </div>
 
   <div class="project">
-    <h3>Скрипты и мелкая автоматизация</h3>
+    <h3 data-i18n="proj4_title">Скрипты и мелкая автоматизация</h3>
     <div class="meta">Python</div>
-    <p>
+    <p data-i18n="proj4_desc">
       Разные утилиты под свои задачи: парсинг, обработка файлов, простая автоматизация.
       Через них лучше понимаю язык и сразу применяю его на практике.
     </p>
@@ -489,21 +515,21 @@
 </section>
 
 <section id="goals" class="reveal">
-  <h2>Что ищу</h2>
+  <h2 data-i18n="goals_title">Что ищу</h2>
   <div class="goals-box">
-    <h3>Открыт к интересным предложениям</h3>
-    <p>
+    <h3 data-i18n="goals_h3">Открыт к интересным предложениям</h3>
+    <p data-i18n="goals_p1">
       Хочу работать в сильной команде над продуктами, которые реально используют люди.
       Интересны крупные компании — Яндекс, VK и другие — где есть масштаб задач,
       возможность расти и сильная инженерная культура.
     </p>
-    <p>
+    <p data-i18n="goals_p2">
       Особенно близки направления, связанные с мобильной разработкой, внутренними
       инструментами, автоматизацией и сервисами, где пересекаются Python и
       клиентские технологии. Готов быстро учиться, брать ответственность и
       работать в команде.
     </p>
-    <p>
+    <p data-i18n="goals_p3">
       Сейчас подтягиваю Python и Swift, участвую в хакатонах и довожу pet-проекты
       до рабочего состояния, чтобы было что показать.
     </p>
@@ -511,13 +537,13 @@
 </section>
 
 <section class="reveal">
-  <h2>Хакатоны</h2>
-  <p>
+  <h2 data-i18n="hack_title">Хакатоны</h2>
+  <p data-i18n="hack_p1">
     За 2025–2026 годы поучаствовал в нескольких онлайн-хакатонах. Команды
     собирать было непросто, но хотя бы попробовал формат и понял, как быстро
     собирать прототип и рассказывать о нём.
   </p>
-  <p>
+  <p data-i18n="hack_p2">
     Сейчас ищу людей, с кем можно поехать на офлайн-мероприятия в Москве.
     Особенно интересны темы, связанные с мобильными приложениями, health-tech
     и сервисами, которые реально помогают.
@@ -525,8 +551,8 @@
 </section>
 
 <section id="contact" class="contact reveal">
-  <h2>Написать мне</h2>
-  <p>Если хочешь обсудить код, хакатоны, работу или просто поздороваться — пиши.</p>
+  <h2 data-i18n="contact_title">Написать мне</h2>
+  <p data-i18n="contact_text">Если хочешь обсудить код, хакатоны, работу или просто поздороваться — пиши.</p>
   <div class="btns">
     <a class="btn primary" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
     <a class="btn" href="https://t.me/TheDarksideHack" target="_blank">Telegram</a>
@@ -536,14 +562,119 @@
   </div>
 </section>
 
-<footer>
-  © 2026 Ивахненко Кирилл Дмитриевич
-</footer>
+<footer data-i18n="footer">© 2026 Ивахненко Кирилл Дмитриевич</footer>
 
 </div>
 
 <script>
-  // ===== matrix rain =====
+  // ===== i18n =====
+  const translations = {
+    ru: {
+      nav_about: 'обо мне',
+      nav_projects: 'проекты',
+      nav_goals: 'цели',
+      nav_contact: 'связь',
+      badge: 'Москва',
+      name: 'Ивахненко Кирилл Дмитриевич',
+      hero_text: 'Занимаюсь Python и разработкой под экосистему Apple.<br>Делаю свои проекты, участвую в хакатонах и ищу интересную работу.',
+      btn_projects: 'Смотреть проекты',
+      about_title: 'О себе',
+      about_p1: 'Живу в Москве. Последнее время плотно сижу в Python — пишу ботов, скрипты, пробую небольшой бэкенд. Параллельно изучаю Swift и SwiftUI, потому что хочу нормально разрабатывать приложения сразу под несколько платформ Apple: iPhone, iPad, Mac и Apple TV.',
+      about_p2: 'Мне нравится, когда то, что пишешь, действительно помогает. Поэтому один из проектов, которым занимаюсь дольше остальных — приложение для людей с диабетом. Пока оно на Android, но думаю и про версии под Apple.',
+      about_p3: 'В свободное время играю в компьютерных клубах, занимаюсь музыкой и моушен-графикой. Участвую в тендерах, люблю работать со студентами — объяснять, разбирать задачи и смотреть, как человек начинает понимать.',
+      about_p4: 'Хакатоны воспринимаю как хороший способ быстро прокачаться и познакомиться с людьми. Уже участвовал в нескольких онлайн-форматах. Сейчас хочу найти команду и попробовать что-то офлайн в Москве.',
+      skills_title: 'Чем занимаюсь',
+      skill_motion: 'Моушен-графика',
+      skill_music: 'Музыка',
+      skills_note: 'Основное внимание сейчас уделяю Python и Swift. Kotlin использую в текущем pet-проекте. Остальное — по необходимости и интересам.',
+      projects_title: 'Проекты',
+      proj1_title: 'Приложение для контроля диабета',
+      proj1_meta: 'Android · Kotlin · pet-проект',
+      proj1_desc: 'Делаю инструмент, который помогает следить за глюкозой и инсулином. Есть быстрый ввод данных, поддержка Libre и Medtronic, простые графики. Пишу в первую очередь для себя, но стараюсь делать так, чтобы им было удобно пользоваться и другим.',
+      proj2_title: 'Telegram-бот для учёта расходов',
+      proj2_desc: 'Бот, в который просто пишешь сумму и категорию. В конце месяца можно посмотреть, куда ушли деньги. Хранение в SQLite, без лишней сложности. Пользуюсь сам.',
+      proj3_title: 'Трекер привычек',
+      proj3_meta: 'SwiftUI · в процессе',
+      proj3_desc: 'Небольшое приложение, через которое учу SwiftUI, навигацию и работу с данными. Хочу сделать так, чтобы оно нормально работало не только на iPhone, но и на iPad и Mac.',
+      proj4_title: 'Скрипты и мелкая автоматизация',
+      proj4_desc: 'Разные утилиты под свои задачи: парсинг, обработка файлов, простая автоматизация. Через них лучше понимаю язык и сразу применяю его на практике.',
+      goals_title: 'Что ищу',
+      goals_h3: 'Открыт к интересным предложениям',
+      goals_p1: 'Хочу работать в сильной команде над продуктами, которые реально используют люди. Интересны крупные компании — Яндекс, VK и другие — где есть масштаб задач, возможность расти и сильная инженерная культура.',
+      goals_p2: 'Особенно близки направления, связанные с мобильной разработкой, внутренними инструментами, автоматизацией и сервисами, где пересекаются Python и клиентские технологии. Готов быстро учиться, брать ответственность и работать в команде.',
+      goals_p3: 'Сейчас подтягиваю Python и Swift, участвую в хакатонах и довожу pet-проекты до рабочего состояния, чтобы было что показать.',
+      hack_title: 'Хакатоны',
+      hack_p1: 'За 2025–2026 годы поучаствовал в нескольких онлайн-хакатонах. Команды собирать было непросто, но хотя бы попробовал формат и понял, как быстро собирать прототип и рассказывать о нём.',
+      hack_p2: 'Сейчас ищу людей, с кем можно поехать на офлайн-мероприятия в Москве. Особенно интересны темы, связанные с мобильными приложениями, health-tech и сервисами, которые реально помогают.',
+      contact_title: 'Написать мне',
+      contact_text: 'Если хочешь обсудить код, хакатоны, работу или просто поздороваться — пиши.',
+      footer: '© 2026 Ивахненко Кирилл Дмитриевич'
+    },
+    en: {
+      nav_about: 'about',
+      nav_projects: 'projects',
+      nav_goals: 'goals',
+      nav_contact: 'contact',
+      badge: 'Moscow',
+      name: 'Kirill Dmitrievich Ivakhnenko',
+      hero_text: 'I work with Python and develop for the Apple ecosystem.<br>I build my own projects, take part in hackathons and look for interesting opportunities.',
+      btn_projects: 'View projects',
+      about_title: 'About me',
+      about_p1: 'I live in Moscow. Lately I have been focusing on Python — writing bots, scripts and trying a bit of backend. At the same time I am learning Swift and SwiftUI because I want to build apps properly for the whole Apple ecosystem: iPhone, iPad, Mac and Apple TV.',
+      about_p2: 'I like it when what I write actually helps people. That is why one of the projects I have been working on the longest is an app for people with diabetes. Right now it is on Android, but I am also thinking about Apple versions.',
+      about_p3: 'In my free time I play at computer clubs, do music and motion graphics. I take part in tenders and enjoy working with students — explaining things, breaking down problems and watching someone start to get it.',
+      about_p4: 'I see hackathons as a good way to level up quickly and meet people. I have already joined several online ones. Now I want to find a team and try something offline in Moscow.',
+      skills_title: 'What I do',
+      skill_motion: 'Motion graphics',
+      skill_music: 'Music',
+      skills_note: 'Right now my main focus is Python and Swift. I use Kotlin in my current pet project. Everything else is as needed or out of interest.',
+      projects_title: 'Projects',
+      proj1_title: 'Diabetes control app',
+      proj1_meta: 'Android · Kotlin · pet project',
+      proj1_desc: 'I am building a tool that helps track glucose and insulin. It has fast data entry, support for Libre and Medtronic, and simple charts. I write it primarily for myself, but try to make it convenient for others as well.',
+      proj2_title: 'Expense tracking Telegram bot',
+      proj2_desc: 'A bot where you just type the amount and category. At the end of the month you can see where the money went. Stored in SQLite, no extra complexity. I use it myself.',
+      proj3_title: 'Habit tracker',
+      proj3_meta: 'SwiftUI · in progress',
+      proj3_desc: 'A small app through which I learn SwiftUI, navigation and data handling. I want it to work well not only on iPhone, but also on iPad and Mac.',
+      proj4_title: 'Scripts and small automation',
+      proj4_desc: 'Various utilities for my own tasks: parsing, file processing, simple automation. They help me understand the language better and apply it right away.',
+      goals_title: 'What I am looking for',
+      goals_h3: 'Open to interesting offers',
+      goals_p1: 'I want to work in a strong team on products that people actually use. I am interested in large companies — Yandex, VK and others — where there is scale, room to grow and a solid engineering culture.',
+      goals_p2: 'I am especially drawn to mobile development, internal tools, automation and services where Python and client-side technologies meet. I am ready to learn fast, take responsibility and work as part of a team.',
+      goals_p3: 'Right now I am improving my Python and Swift, taking part in hackathons and bringing pet projects to a working state so I have something to show.',
+      hack_title: 'Hackathons',
+      hack_p1: 'In 2025–2026 I took part in several online hackathons. Assembling teams was not easy, but at least I tried the format and learned how to quickly build a prototype and present it.',
+      hack_p2: 'Now I am looking for people to go to offline events in Moscow with. I am especially interested in topics related to mobile apps, health-tech and services that actually help people.',
+      contact_title: 'Get in touch',
+      contact_text: 'If you want to talk about code, hackathons, work or just say hi — write me.',
+      footer: '© 2026 Kirill Dmitrievich Ivakhnenko'
+    }
+  };
+
+  function setLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+
+    document.title = translations[lang].name;
+  }
+
+  // load saved language or default to Russian
+  const saved = localStorage.getItem('lang') || 'ru';
+  setLang(saved);
+
+  // ===== matrix =====
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
 
@@ -573,7 +704,7 @@
   }
   setInterval(drawMatrix, 40);
 
-  // ===== custom cursor + particle trail =====
+  // ===== cursor =====
   const dot = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
   let mouseX = -100, mouseY = -100;
@@ -585,7 +716,6 @@
     dot.style.left = mouseX + 'px';
     dot.style.top = mouseY + 'px';
 
-    // trail particle
     const p = document.createElement('div');
     p.className = 'trail-particle';
     const size = 4 + Math.random() * 6;
@@ -611,7 +741,6 @@
     }, 16);
   });
 
-  // smooth ring follow
   function animateRing() {
     ringX += (mouseX - ringX) * 0.15;
     ringY += (mouseY - ringY) * 0.15;
@@ -621,8 +750,7 @@
   }
   animateRing();
 
-  // hover effect on links/buttons
-  document.querySelectorAll('a, .btn, .skill, .project').forEach(el => {
+  document.querySelectorAll('a, .btn, .skill, .project, .lang-switch button').forEach(el => {
     el.addEventListener('mouseenter', () => {
       dot.classList.add('hover');
       ring.classList.add('hover');
@@ -633,7 +761,7 @@
     });
   });
 
-  // ===== scroll reveal =====
+  // ===== reveal =====
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -641,7 +769,6 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // smooth anchor scroll
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();

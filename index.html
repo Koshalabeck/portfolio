@@ -24,12 +24,29 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* matrix canvas */
+  #matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
   }
 
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* nav */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -41,7 +58,6 @@
     background: rgba(9, 9, 11, 0.82);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
-    transition: background 0.3s;
   }
 
   .logo {
@@ -62,7 +78,6 @@
     text-decoration: none;
   }
 
-  /* hero */
   .hero {
     max-width: 740px;
     margin: 0 auto;
@@ -142,7 +157,6 @@
     background: #a5b4fc;
   }
 
-  /* sections */
   section {
     max-width: 740px;
     margin: 0 auto;
@@ -164,7 +178,6 @@
 
   p strong { color: var(--text); }
 
-  /* fade on scroll */
   .reveal {
     opacity: 0;
     transform: translateY(22px);
@@ -176,7 +189,6 @@
     transform: translateY(0);
   }
 
-  /* skills */
   .skills {
     display: flex;
     flex-wrap: wrap;
@@ -198,7 +210,6 @@
     transform: translateY(-2px);
   }
 
-  /* projects */
   .project {
     background: var(--card);
     border: 1px solid var(--border);
@@ -239,7 +250,6 @@
     border-radius: 6px;
   }
 
-  /* yandex */
   .yandex-box {
     background: var(--card);
     border: 1px solid var(--border);
@@ -252,7 +262,6 @@
     margin-bottom: 12px;
   }
 
-  /* contact */
   .contact {
     text-align: center;
     padding-bottom: 50px;
@@ -288,6 +297,10 @@
 </style>
 </head>
 <body>
+
+<canvas id="matrix"></canvas>
+
+<div class="content">
 
 <nav>
   <div class="logo">КИ</div>
@@ -372,7 +385,7 @@
   <div class="project">
     <h3>Telegram-бот для учёта расходов</h3>
     <div class="meta">Python · aiogram</div>
-  <p>
+    <p>
       Бот, в который просто пишешь сумму и категорию. В конце месяца можно
       посмотреть, куда ушли деньги. Хранение в SQLite, без лишней сложности.
       Пользуюсь сам.
@@ -454,7 +467,9 @@
   <p>Если хочешь обсудить код, хакатоны или просто поздороваться — пиши.</p>
   <div class="btns">
     <a class="btn primary" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
-    <a class="btn" href="https://x.com/Scrillex_MMK" target="_blank">X / Twitter</a>
+    <a class="btn" href="https://t.me/TheDarksideHack" target="_blank">Telegram</a>
+    <a class="btn" href="https://vk.com/id360488645" target="_blank">ВКонтакте</a>
+    <a class="btn" href="https://x.com/Scrillex_MMK" target="_blank">X</a>
   </div>
 </section>
 
@@ -462,7 +477,45 @@
   © 2026 Кирилл Ивахненко
 </footer>
 
+</div>
+
 <script>
+  // matrix rain
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const fontSize = 14;
+  let columns = Math.floor(canvas.width / fontSize);
+  let drops = Array(columns).fill(1);
+
+  function draw() {
+    ctx.fillStyle = 'rgba(9, 9, 11, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#22c55e';
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 40);
+
   // появление блоков при скролле
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -474,7 +527,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // плавный скролл по якорям
+  // плавный скролл
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();

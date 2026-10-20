@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кирилл Ивахненко</title>
+<style>
+  :root {
+    --bg: #09090b;
+    --card: #121216;
+    --border: #1f1f26;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --accent: #818cf8;
+    --accent-soft: rgba(129, 140, 248, 0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 28px;
+    background: rgba(9, 9, 11, 0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+
+  .logo {
+    font-weight: 650;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+
+  nav .links a {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-left: 22px;
+    transition: color 0.2s;
+  }
+
+  nav .links a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* hero */
+  .hero {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 140px 28px 80px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 5px 13px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.65s ease forwards 0.25s;
+  }
+
+  .hero p {
+    font-size: 1.18rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 34px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.65s ease forwards 0.4s;
+  }
+
+  .btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.65s ease forwards 0.55s;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: #09090b;
+    border-color: var(--accent);
+  }
+
+  .btn:hover {
+    border-color: #3f3f46;
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .btn.primary:hover {
+    background: #a5b4fc;
+  }
+
+  /* sections */
+  section {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 55px 28px;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    font-weight: 650;
+    margin-bottom: 22px;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: var(--muted);
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+  }
+
+  p strong { color: var(--text); }
+
+  /* fade on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* skills */
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .skill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #d4d4d8;
+    transition: all 0.2s;
+  }
+
+  .skill:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* projects */
+  .project {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    transition: all 0.25s;
+  }
+
+  .project:hover {
+    border-color: #2e2e36;
+    transform: translateY(-3px);
+  }
+
+  .project h3 {
+    font-size: 1.12rem;
+    margin-bottom: 5px;
+  }
+
+  .project .meta {
+    font-size: 0.8rem;
+    color: #71717a;
+    margin-bottom: 11px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 13px;
+  }
+
+  .tags span {
+    font-size: 0.75rem;
+    background: #1c1c22;
+    color: #a1a1aa;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  /* yandex */
+  .yandex-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+
+  .yandex-box h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+  }
+
+  /* contact */
+  .contact {
+    text-align: center;
+    padding-bottom: 50px;
+  }
+
+  .contact .btns {
+    justify-content: center;
+    margin-top: 22px;
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px 20px 50px;
+    color: #52525b;
+    font-size: 0.85rem;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 560px) {
+    nav { padding: 13px 18px; }
+    .hero { padding: 115px 18px 60px; }
+    section { padding: 45px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">КИ</div>
+  <div class="links">
+    <a href="#about">обо мне</a>
+    <a href="#projects">проекты</a>
+    <a href="#yandex">яндекс</a>
+    <a href="#contact">связь</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Москва</div>
+  <h1>Кирилл Ивахненко</h1>
+  <p>
+    Занимаюсь Python и разработкой под экосистему Apple.<br>
+    Делаю свои проекты, участвую в хакатонах и хочу работать в Яндексе.
+  </p>
+  <div class="btns">
+    <a class="btn primary" href="#projects">Смотреть проекты</a>
+    <a class="btn" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<section id="about" class="reveal">
+  <h2>О себе</h2>
+  <p>
+    Живу в Москве. Последнее время плотно сижу в Python — пишу ботов, скрипты,
+    пробую небольшой бэкенд. Параллельно изучаю Swift и SwiftUI, потому что хочу
+    нормально разрабатывать приложения сразу под несколько платформ Apple:
+    iPhone, iPad, Mac и даже Apple TV.
+  </p>
+  <p>
+    Мне нравится, когда то, что пишешь, действительно помогает. Поэтому один из
+    проектов, которым занимаюсь дольше остальных — приложение для людей с диабетом.
+    Пока оно на Android, но думаю и про версии под Apple.
+  </p>
+  <p>
+    Хакатоны воспринимаю как хороший способ быстро прокачаться и познакомиться
+    с людьми. Уже участвовал в нескольких онлайн-форматах. Сейчас хочу найти
+    команду и попробовать что-то офлайн в Москве.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>Чем занимаюсь</h2>
+  <div class="skills">
+    <div class="skill">Python</div>
+    <div class="skill">Swift</div>
+    <div class="skill">SwiftUI</div>
+    <div class="skill">Kotlin</div>
+    <div class="skill">Android</div>
+    <div class="skill">Git</div>
+    <div class="skill">aiogram</div>
+    <div class="skill">HTML / CSS / JS</div>
+  </div>
+  <p style="margin-top: 22px;">
+    Основное внимание сейчас уделяю Python и Swift. Kotlin использую в текущем
+    pet-проекте. Остальное — по необходимости.
+  </p>
+</section>
+
+<section id="projects" class="reveal">
+  <h2>Проекты</h2>
+
+  <div class="project">
+    <h3>Приложение для контроля диабета</h3>
+    <div class="meta">Android · Kotlin · pet-проект</div>
+    <p>
+      Делаю инструмент, который помогает следить за глюкозой и инсулином.
+      Есть быстрый ввод данных, поддержка Libre и Medtronic, простые графики.
+      Пишу в первую очередь для себя, но стараюсь делать так, чтобы им было
+      удобно пользоваться и другим.
+    </p>
+    <div class="tags">
+      <span>Kotlin</span>
+      <span>Android</span>
+      <span>Health</span>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>Telegram-бот для учёта расходов</h3>
+    <div class="meta">Python · aiogram</div>
+  <p>
+      Бот, в который просто пишешь сумму и категорию. В конце месяца можно
+      посмотреть, куда ушли деньги. Хранение в SQLite, без лишней сложности.
+      Пользуюсь сам.
+    </p>
+    <div class="tags">
+      <span>Python</span>
+      <span>aiogram</span>
+      <span>SQLite</span>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>Трекер привычек</h3>
+    <div class="meta">SwiftUI · в процессе</div>
+    <p>
+      Небольшое приложение, через которое учу SwiftUI, навигацию и работу с данными.
+      Хочу сделать так, чтобы оно нормально работало не только на iPhone,
+      но и на iPad и Mac.
+    </p>
+    <div class="tags">
+      <span>Swift</span>
+      <span>SwiftUI</span>
+      <span>iOS / iPadOS / macOS</span>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>Скрипты и мелкая автоматизация</h3>
+    <div class="meta">Python</div>
+    <p>
+      Разные утилиты под свои задачи: парсинг, обработка файлов, простая автоматизация.
+      Через них лучше понимаю язык и сразу применяю его на практике.
+    </p>
+    <div class="tags">
+      <span>Python</span>
+    </div>
+  </div>
+</section>
+
+<section id="yandex" class="reveal">
+  <h2>Про Яндекс</h2>
+  <div class="yandex-box">
+    <h3>Хочу работать в Яндексе</h3>
+    <p>
+      Слежу за компанией уже давно. Нравится масштаб задач и то, как много
+      продуктов реально влияют на повседневную жизнь людей. Есть ощущение сильной
+      инженерной культуры и возможности расти внутри.
+    </p>
+    <p>
+      Мне интересны направления, связанные с мобильной разработкой, внутренними
+      инструментами, автоматизацией и сервисами, где пересекаются Python и
+      клиентские технологии. Готов быстро учиться, брать ответственность и
+      работать в команде.
+    </p>
+    <p>
+      Сейчас стараюсь подтягивать Python и Swift, участвовать в хакатонах и
+      доводить pet-проекты до рабочего состояния, чтобы к моменту отклика
+      было что показать.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>Хакатоны</h2>
+  <p>
+    За 2025–2026 годы поучаствовал в нескольких онлайн-хакатонах. Команды
+    собирать было непросто, но хотя бы попробовал формат и понял, как быстро
+    собирать прототип и рассказывать о нём.
+  </p>
+  <p>
+    Сейчас ищу людей, с кем можно поехать на офлайн-мероприятия в Москве.
+    Особенно интересны темы, связанные с мобильными приложениями, health-tech
+    и сервисами, которые реально помогают.
+  </p>
+</section>
+
+<section id="contact" class="contact reveal">
+  <h2>Написать мне</h2>
+  <p>Если хочешь обсудить код, хакатоны или просто поздороваться — пиши.</p>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
+    <a class="btn" href="https://x.com/Scrillex_MMK" target="_blank">X / Twitter</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Кирилл Ивахненко
+</footer>
+
+<script>
+  // появление блоков при скролле
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // плавный скролл по якорям
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.querySelector(link.getAttribute('href'));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>

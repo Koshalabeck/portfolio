@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Кирилл Ивахненко</title>
+<title>Ивахненко Кирилл Дмитриевич</title>
 <style>
   :root {
     --bg: #09090b;
@@ -27,7 +27,6 @@
     overflow-x: hidden;
   }
 
-  /* matrix canvas */
   #matrix {
     position: fixed;
     top: 0;
@@ -69,7 +68,7 @@
   nav .links a {
     color: var(--muted);
     font-size: 0.9rem;
-    margin-left: 22px;
+    margin-left: 20px;
     transition: color 0.2s;
   }
 
@@ -99,10 +98,10 @@
   }
 
   .hero h1 {
-    font-size: clamp(2.6rem, 7vw, 3.6rem);
+    font-size: clamp(2.3rem, 6vw, 3.2rem);
     font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.1;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
     margin-bottom: 18px;
     opacity: 0;
     transform: translateY(16px);
@@ -110,9 +109,9 @@
   }
 
   .hero p {
-    font-size: 1.18rem;
+    font-size: 1.15rem;
     color: var(--muted);
-    max-width: 520px;
+    max-width: 540px;
     margin-bottom: 34px;
     opacity: 0;
     transform: translateY(16px);
@@ -131,9 +130,9 @@
   .btn {
     display: inline-flex;
     align-items: center;
-    padding: 11px 20px;
+    padding: 11px 18px;
     border-radius: 10px;
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     font-weight: 500;
     border: 1px solid var(--border);
     color: var(--text);
@@ -250,14 +249,14 @@
     border-radius: 6px;
   }
 
-  .yandex-box {
+  .goals-box {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 26px;
   }
 
-  .yandex-box h3 {
+  .goals-box h3 {
     font-size: 1.15rem;
     margin-bottom: 12px;
   }
@@ -291,6 +290,7 @@
 
   @media (max-width: 560px) {
     nav { padding: 13px 18px; }
+    nav .links a { margin-left: 14px; font-size: 0.85rem; }
     .hero { padding: 115px 18px 60px; }
     section { padding: 45px 18px; }
   }
@@ -307,17 +307,17 @@
   <div class="links">
     <a href="#about">обо мне</a>
     <a href="#projects">проекты</a>
-    <a href="#yandex">яндекс</a>
+    <a href="#goals">цели</a>
     <a href="#contact">связь</a>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-badge">Москва</div>
-  <h1>Кирилл Ивахненко</h1>
+  <h1>Ивахненко Кирилл Дмитриевич</h1>
   <p>
     Занимаюсь Python и разработкой под экосистему Apple.<br>
-    Делаю свои проекты, участвую в хакатонах и хочу работать в Яндексе.
+    Делаю свои проекты, участвую в хакатонах и ищу интересную работу.
   </p>
   <div class="btns">
     <a class="btn primary" href="#projects">Смотреть проекты</a>
@@ -331,12 +331,17 @@
     Живу в Москве. Последнее время плотно сижу в Python — пишу ботов, скрипты,
     пробую небольшой бэкенд. Параллельно изучаю Swift и SwiftUI, потому что хочу
     нормально разрабатывать приложения сразу под несколько платформ Apple:
-    iPhone, iPad, Mac и даже Apple TV.
+    iPhone, iPad, Mac и Apple TV.
   </p>
   <p>
     Мне нравится, когда то, что пишешь, действительно помогает. Поэтому один из
     проектов, которым занимаюсь дольше остальных — приложение для людей с диабетом.
     Пока оно на Android, но думаю и про версии под Apple.
+  </p>
+  <p>
+    В свободное время играю в компьютерных клубах, занимаюсь музыкой и моушен-графикой.
+    Участвую в тендерах, люблю работать со студентами — объяснять, разбирать задачи
+    и смотреть, как человек начинает понимать.
   </p>
   <p>
     Хакатоны воспринимаю как хороший способ быстро прокачаться и познакомиться
@@ -356,10 +361,12 @@
     <div class="skill">Git</div>
     <div class="skill">aiogram</div>
     <div class="skill">HTML / CSS / JS</div>
+    <div class="skill">Моушен-графика</div>
+    <div class="skill">Музыка</div>
   </div>
   <p style="margin-top: 22px;">
     Основное внимание сейчас уделяю Python и Swift. Kotlin использую в текущем
-    pet-проекте. Остальное — по необходимости.
+    pet-проекте. Остальное — по необходимости и интересам.
   </p>
 </section>
 
@@ -425,25 +432,24 @@
   </div>
 </section>
 
-<section id="yandex" class="reveal">
-  <h2>Про Яндекс</h2>
-  <div class="yandex-box">
-    <h3>Хочу работать в Яндексе</h3>
+<section id="goals" class="reveal">
+  <h2>Что ищу</h2>
+  <div class="goals-box">
+    <h3>Открыт к интересным предложениям</h3>
     <p>
-      Слежу за компанией уже давно. Нравится масштаб задач и то, как много
-      продуктов реально влияют на повседневную жизнь людей. Есть ощущение сильной
-      инженерной культуры и возможности расти внутри.
+      Хочу работать в сильной команде над продуктами, которые реально используют люди.
+      Интересны крупные компании — Яндекс, VK и другие — где есть масштаб задач,
+      возможность расти и сильная инженерная культура.
     </p>
     <p>
-      Мне интересны направления, связанные с мобильной разработкой, внутренними
+      Особенно близки направления, связанные с мобильной разработкой, внутренними
       инструментами, автоматизацией и сервисами, где пересекаются Python и
       клиентские технологии. Готов быстро учиться, брать ответственность и
       работать в команде.
     </p>
     <p>
-      Сейчас стараюсь подтягивать Python и Swift, участвовать в хакатонах и
-      доводить pet-проекты до рабочего состояния, чтобы к моменту отклика
-      было что показать.
+      Сейчас подтягиваю Python и Swift, участвую в хакатонах и довожу pet-проекты
+      до рабочего состояния, чтобы было что показать.
     </p>
   </div>
 </section>
@@ -464,23 +470,23 @@
 
 <section id="contact" class="contact reveal">
   <h2>Написать мне</h2>
-  <p>Если хочешь обсудить код, хакатоны или просто поздороваться — пиши.</p>
+  <p>Если хочешь обсудить код, хакатоны, работу или просто поздороваться — пиши.</p>
   <div class="btns">
     <a class="btn primary" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
     <a class="btn" href="https://t.me/TheDarksideHack" target="_blank">Telegram</a>
     <a class="btn" href="https://vk.com/id360488645" target="_blank">ВКонтакте</a>
+    <a class="btn" href="https://steamcommunity.com/id/koshalabeck/" target="_blank">Steam</a>
     <a class="btn" href="https://x.com/Scrillex_MMK" target="_blank">X</a>
   </div>
 </section>
 
 <footer>
-  © 2026 Кирилл Ивахненко
+  © 2026 Ивахненко Кирилл Дмитриевич
 </footer>
 
 </div>
 
 <script>
-  // matrix rain
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
 
@@ -516,7 +522,6 @@
 
   setInterval(draw, 40);
 
-  // появление блоков при скролле
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -527,7 +532,6 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // плавный скролл
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();

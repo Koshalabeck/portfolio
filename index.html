@@ -5,374 +5,218 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ивахненко Кирилл Дмитриевич</title>
 <style>
-  :root {
-    --bg: #09090b;
-    --card: #121216;
-    --border: #1f1f26;
-    --text: #f4f4f5;
-    --muted: #a1a1aa;
-    --accent: #818cf8;
-    --accent-soft: rgba(129, 140, 248, 0.15);
-  }
+:root {
+  --bg: #09090b;
+  --card: #121216;
+  --border: #1f1f26;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --accent: #818cf8;
+  --accent2: #34d399;
+  --accent-soft: rgba(129,140,248,.15);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+@media (min-width: 900px) { body { cursor: none; } }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+#matrix {
+  position: fixed; inset: 0; z-index: 0;
+  opacity: .14; pointer-events: none;
+}
+.content { position: relative; z-index: 1; }
 
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
+.cursor-dot, .cursor-ring, .trail-particle { display: none; }
+@media (min-width: 900px) {
   .cursor-dot {
-    position: fixed;
-    top: 0; left: 0;
-    width: 8px; height: 8px;
-    background: #a5b4fc;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.15s, height 0.15s, background 0.15s;
-    mix-blend-mode: screen;
+    display: block; position: fixed; top: 0; left: 0;
+    width: 8px; height: 8px; background: #a5b4fc; border-radius: 50%;
+    pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+    transition: width .15s, height .15s; mix-blend-mode: screen;
   }
-
-  .cursor-dot.hover {
-    width: 18px; height: 18px;
-    background: #c4b5fd;
-  }
-
+  .cursor-dot.hover { width: 18px; height: 18px; background: #c4b5fd; }
   .cursor-ring {
-    position: fixed;
-    top: 0; left: 0;
-    width: 32px; height: 32px;
-    border: 1.5px solid rgba(165, 180, 252, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, border-color 0.2s;
+    display: block; position: fixed; top: 0; left: 0;
+    width: 32px; height: 32px; border: 1.5px solid rgba(165,180,252,.5);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: width .2s, height .2s, border-color .2s;
   }
-
-  .cursor-ring.hover {
-    width: 48px; height: 48px;
-    border-color: rgba(196, 181, 253, 0.7);
-  }
-
+  .cursor-ring.hover { width: 48px; height: 48px; border-color: rgba(196,181,253,.7); }
   .trail-particle {
-    position: fixed;
-    pointer-events: none;
-    border-radius: 50%;
-    z-index: 9997;
-    mix-blend-mode: screen;
+    display: block; position: fixed; pointer-events: none;
+    border-radius: 50%; z-index: 9997; mix-blend-mode: screen;
   }
+}
 
-  #matrix {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    opacity: 0.16;
-    pointer-events: none;
-  }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-  .content { position: relative; z-index: 1; }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 20px;
+  background: rgba(9,9,11,.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-weight: 650; font-size: 1.05rem; letter-spacing: -.02em; }
+nav .right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+nav .links { display: flex; flex-wrap: wrap; gap: 4px 0; }
+nav .links a {
+  color: var(--muted); font-size: .82rem; margin-left: 12px;
+  transition: color .2s;
+}
+nav .links a:hover { color: var(--text); text-decoration: none; }
 
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+.lang-switch {
+  display: flex; border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; margin-left: 10px;
+}
+.lang-switch button {
+  background: transparent; border: none; color: var(--muted);
+  font-size: .75rem; padding: 5px 9px; cursor: pointer; font-weight: 500;
+}
+.lang-switch button.active { background: var(--accent); color: #09090b; }
 
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 50;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 28px;
-    background: rgba(9, 9, 11, 0.82);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
+.hero {
+  max-width: 760px; margin: 0 auto;
+  padding: 110px 20px 60px;
+}
+.hero-badge {
+  display: inline-block; font-size: .78rem; color: var(--accent);
+  background: var(--accent-soft); padding: 5px 12px; border-radius: 20px;
+  margin-bottom: 16px; font-weight: 500;
+  opacity: 0; transform: translateY(12px);
+  animation: fadeUp .6s ease forwards .1s;
+}
+.hero h1 {
+  font-size: clamp(1.9rem, 5.5vw, 2.9rem);
+  font-weight: 700; letter-spacing: -.03em; line-height: 1.15;
+  margin-bottom: 16px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp .65s ease forwards .25s;
+}
+.hero p {
+  font-size: 1.08rem; color: var(--muted); max-width: 540px;
+  margin-bottom: 28px;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp .65s ease forwards .4s;
+}
+.btns {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp .65s ease forwards .55s;
+}
+.btn {
+  display: inline-flex; align-items: center; padding: 10px 16px;
+  border-radius: 10px; font-size: .9rem; font-weight: 500;
+  border: 1px solid var(--border); color: var(--text);
+  background: transparent; transition: all .2s;
+}
+.btn.primary {
+  background: var(--accent); color: #09090b; border-color: var(--accent);
+}
+.btn:hover {
+  border-color: #3f3f46; text-decoration: none; transform: translateY(-2px);
+}
+.btn.primary:hover { background: #a5b4fc; }
 
-  .logo {
-    font-weight: 650;
-    font-size: 1.05rem;
-    letter-spacing: -0.02em;
-  }
+section {
+  max-width: 760px; margin: 0 auto; padding: 48px 20px;
+}
+h2 {
+  font-size: 1.35rem; font-weight: 650; margin-bottom: 20px;
+  letter-spacing: -.02em;
+}
+p { color: var(--muted); margin-bottom: 14px; font-size: 1.02rem; }
+p strong { color: var(--text); }
 
-  nav .right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  nav .links a {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-left: 18px;
-    transition: color 0.2s;
-  }
+.skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 7px 14px; border-radius: 20px; font-size: .88rem;
+  color: #d4d4d8; transition: all .2s;
+}
+.skill:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-  nav .links a:hover {
-    color: var(--text);
-    text-decoration: none;
-  }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 22px; margin-bottom: 12px;
+  transition: all .25s;
+}
+.card:hover { border-color: #2e2e36; transform: translateY(-3px); }
+.card h3 { font-size: 1.08rem; margin-bottom: 4px; }
+.card .meta { font-size: .78rem; color: #71717a; margin-bottom: 10px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tags span {
+  font-size: .72rem; background: #1c1c22; color: #a1a1aa;
+  padding: 3px 9px; border-radius: 6px;
+}
 
-  .lang-switch {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-left: 18px;
-  }
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 560px) {
+  .grid2 { grid-template-columns: 1fr 1fr; }
+}
 
-  .lang-switch button {
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    cursor: none;
-    font-weight: 500;
-    transition: all 0.2s;
-  }
+.quality {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  transition: border-color .2s, transform .2s;
+}
+.quality:hover { border-color: var(--accent); transform: translateY(-2px); }
+.quality b { display: block; font-size: .95rem; margin-bottom: 4px; }
+.quality span { font-size: .88rem; color: var(--muted); }
 
-  .lang-switch button.active {
-    background: var(--accent);
-    color: #09090b;
-  }
+.lang-row {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
+}
+.lang-pill {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 16px; min-width: 140px;
+}
+.lang-pill b { display: block; font-size: .9rem; margin-bottom: 2px; }
+.lang-pill span { font-size: .82rem; color: var(--muted); }
 
-  .lang-switch button:hover:not(.active) {
-    color: var(--text);
-  }
+.contact { text-align: center; padding-bottom: 40px; }
+.contact .btns { justify-content: center; margin-top: 20px; opacity: 1; transform: none; animation: none; }
 
-  .hero {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 140px 28px 80px;
-  }
+footer {
+  text-align: center; padding: 16px 16px 48px;
+  color: #52525b; font-size: .82rem;
+}
 
-  .hero-badge {
-    display: inline-block;
-    font-size: 0.8rem;
-    color: var(--accent);
-    background: var(--accent-soft);
-    padding: 5px 13px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: fadeUp 0.6s ease forwards 0.1s;
-  }
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  .hero h1 {
-    font-size: clamp(2.2rem, 5.5vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 18px;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeUp 0.65s ease forwards 0.25s;
-  }
-
-  .hero p {
-    font-size: 1.15rem;
-    color: var(--muted);
-    max-width: 540px;
-    margin-bottom: 34px;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeUp 0.65s ease forwards 0.4s;
-  }
-
-  .btns {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeUp 0.65s ease forwards 0.55s;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 11px 18px;
-    border-radius: 10px;
-    font-size: 0.93rem;
-    font-weight: 500;
-    border: 1px solid var(--border);
-    color: var(--text);
-    background: transparent;
-    transition: all 0.2s;
-  }
-
-  .btn.primary {
-    background: var(--accent);
-    color: #09090b;
-    border-color: var(--accent);
-  }
-
-  .btn:hover {
-    border-color: #3f3f46;
-    text-decoration: none;
-    transform: translateY(-2px);
-  }
-
-  .btn.primary:hover {
-    background: #a5b4fc;
-  }
-
-  section {
-    max-width: 740px;
-    margin: 0 auto;
-    padding: 55px 28px;
-  }
-
-  h2 {
-    font-size: 1.45rem;
-    font-weight: 650;
-    margin-bottom: 22px;
-    letter-spacing: -0.02em;
-  }
-
-  p {
-    color: var(--muted);
-    margin-bottom: 15px;
-    font-size: 1.05rem;
-  }
-
-  p strong { color: var(--text); }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-  }
-
-  .skill {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: #d4d4d8;
-    transition: all 0.2s;
-  }
-
-  .skill:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .project {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px 24px;
-    margin-bottom: 14px;
-    transition: all 0.25s;
-  }
-
-  .project:hover {
-    border-color: #2e2e36;
-    transform: translateY(-3px);
-  }
-
-  .project h3 {
-    font-size: 1.12rem;
-    margin-bottom: 5px;
-  }
-
-  .project .meta {
-    font-size: 0.8rem;
-    color: #71717a;
-    margin-bottom: 11px;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 13px;
-  }
-
-  .tags span {
-    font-size: 0.75rem;
-    background: #1c1c22;
-    color: #a1a1aa;
-    padding: 3px 10px;
-    border-radius: 6px;
-  }
-
-  .goals-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 26px;
-  }
-
-  .goals-box h3 {
-    font-size: 1.15rem;
-    margin-bottom: 12px;
-  }
-
-  .contact {
-    text-align: center;
-    padding-bottom: 50px;
-  }
-
-  .contact .btns {
-    justify-content: center;
-    margin-top: 22px;
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-
-  footer {
-    text-align: center;
-    padding: 20px 20px 50px;
-    color: #52525b;
-    font-size: 0.85rem;
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 560px) {
-    nav { padding: 13px 16px; }
-    nav .links a { margin-left: 12px; font-size: 0.82rem; }
-    .lang-switch { margin-left: 10px; }
-    .hero { padding: 115px 18px 60px; }
-    section { padding: 45px 18px; }
-    body { cursor: auto; }
-    .cursor-dot, .cursor-ring, .trail-particle { display: none !important; }
-  }
+@media (max-width: 640px) {
+  nav .links a { margin-left: 8px; font-size: .75rem; }
+  .hero { padding: 100px 16px 48px; }
+  section { padding: 40px 16px; }
+  .btn { padding: 9px 14px; font-size: .85rem; }
+}
 </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
-
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -384,6 +228,7 @@
     <div class="links">
       <a href="#about" data-i18n="nav_about">обо мне</a>
       <a href="#projects" data-i18n="nav_projects">проекты</a>
+      <a href="#security" data-i18n="nav_security">security</a>
       <a href="#goals" data-i18n="nav_goals">цели</a>
       <a href="#contact" data-i18n="nav_contact">связь</a>
     </div>
@@ -398,8 +243,8 @@
   <div class="hero-badge" data-i18n="badge">Москва</div>
   <h1 data-i18n="name">Ивахненко Кирилл Дмитриевич</h1>
   <p data-i18n="hero_text">
-    Занимаюсь Python и разработкой под экосистему Apple.<br>
-    Делаю свои проекты, учусь и ищу интересную работу.
+    Python, экосистема Apple, безопасность систем.<br>
+    Свои проекты, учёба, бизнес и поиск сильной команды.
   </p>
   <div class="btns">
     <a class="btn primary" href="#projects" data-i18n="btn_projects">Смотреть проекты</a>
@@ -411,354 +256,391 @@
   <h2 data-i18n="about_title">О себе</h2>
   <p data-i18n="about_p1">
     Живу в Москве. Получаю образование в Московском политехническом университете.
-    Параллельно прохожу курсы в Яндекс Практикуме и другие образовательные программы,
-    чтобы системно закрывать пробелы и быстрее расти как разработчик.
+    Параллельно прохожу курсы в Яндекс Практикуме и другие программы, чтобы
+    системно закрывать пробелы и быстрее расти.
   </p>
   <p data-i18n="about_p2">
-    Долгое время работал в Т-Банке на разных должностях. Этот опыт дал понимание,
-    как устроены крупные компании, как строится коммуникация и почему важно
-    доводить задачи до результата. Сейчас основной фокус — Python и разработка
-    под экосистему Apple: iOS, iPadOS, macOS и tvOS.
+    Долгое время работал в Т-Банке на разных должностях — это дало понимание,
+    как устроены крупные компании и почему важно доводить задачи до результата.
+    Сейчас основной фокус: Python, разработка под Apple (iOS, iPadOS, macOS, tvOS)
+    и изучение безопасности систем.
   </p>
   <p data-i18n="about_p3">
-    Мне нравится, когда то, что пишешь, действительно помогает. Один из проектов,
-    которым занимаюсь дольше остальных — приложение для людей с диабетом.
-    Пока оно на Android, но думаю и про версии под Apple.
+    Занимался ремонтом техники Apple. Сейчас развиваю свой интернет-магазин
+    <strong>Apple Form</strong> по продаже устройств Apple и готовлю открытие
+    физической точки.
   </p>
   <p data-i18n="about_p4">
-    Увлекаюсь работой с техникой, люблю нестандартные инженерные подходы к задачам.
-    В свободное время играю в компьютерных клубах, в том числе в Counter-Strike,
-    занимаюсь музыкой, моушен-графикой и работаю в Blender. Участвую в тендерах
-    и люблю работать со студентами — объяснять, разбирать задачи и смотреть,
-    как человек начинает понимать.
+    В свободное время играю музыку в клубах, занимаюсь 3D и моушен-графикой,
+    работаю в Blender. Увлекаюсь мотоспортом, морскими судами — в частности катерами —
+    и люблю быстрые машины. Не только «головой»: пилю лобзиком, выжигаю по дереву
+    и делаю ручную работу.
   </p>
   <p data-i18n="about_p5">
-    Хакатоны воспринимаю как хороший способ быстро прокачаться и познакомиться
-    с людьми. Уже участвовал в нескольких онлайн-форматах. Сейчас хочу найти
-    команду и попробовать что-то офлайн в Москве.
+    Участвовал в проектах NN на YouTube, руководил собственным крупным медиа-проектом.
+    Участвую в тендерах, люблю работать со студентами. Хакатоны — способ быстро
+    прокачаться и найти сильную команду.
   </p>
 </section>
 
 <section class="reveal">
-  <h2 data-i18n="skills_title">Чем занимаюсь</h2>
+  <h2 data-i18n="langs_title">Языки</h2>
+  <div class="lang-row">
+    <div class="lang-pill">
+      <b data-i18n="lang_ru_name">Русский</b>
+      <span data-i18n="lang_ru_level">отлично (C2)</span>
+    </div>
+    <div class="lang-pill">
+      <b data-i18n="lang_en_name">English</b>
+      <span data-i18n="lang_en_level">средний (B1–B2)</span>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2 data-i18n="qualities_title">Качества</h2>
+  <div class="grid2">
+    <div class="quality">
+      <b data-i18n="q1_t">Пунктуальность</b>
+      <span data-i18n="q1_d">Сроки и договорённости соблюдаю</span>
+    </div>
+    <div class="quality">
+      <b data-i18n="q2_t">Ответственность</b>
+      <span data-i18n="q2_d">Довожу задачи до результата</span>
+    </div>
+    <div class="quality">
+      <b data-i18n="q3_t">Быстрая обучаемость</b>
+      <span data-i18n="q3_d">Новые инструменты осваиваю на практике</span>
+    </div>
+    <div class="quality">
+      <b data-i18n="q4_t">Инженерный подход</b>
+      <span data-i18n="q4_d">Люблю нестандартные, рабочие решения</span>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2 data-i18n="skills_title">Навыки и интересы</h2>
   <div class="skills">
     <div class="skill">Python</div>
-    <div class="skill">Swift</div>
-    <div class="skill">SwiftUI</div>
+    <div class="skill">Swift / SwiftUI</div>
     <div class="skill">Kotlin</div>
-    <div class="skill">Android</div>
+    <div class="skill">C++</div>
     <div class="skill">Git</div>
-    <div class="skill">aiogram</div>
-    <div class="skill">HTML / CSS / JS</div>
     <div class="skill">Blender</div>
-    <div class="skill" data-i18n="skill_motion">Моушен-графика</div>
-    <div class="skill" data-i18n="skill_music">Музыка</div>
+    <div class="skill" data-i18n="skill_3d">3D / моушен</div>
+    <div class="skill" data-i18n="skill_sec">Security</div>
+    <div class="skill">Flipper Zero</div>
+    <div class="skill">Apple repair</div>
   </div>
-  <p style="margin-top: 22px;" data-i18n="skills_note">
-    Основное внимание сейчас уделяю Python и Swift. Kotlin использую в текущем
-    pet-проекте. Blender и моушен-графика — для визуальных задач. Остальное —
-    по необходимости и интересам.
-  </p>
 </section>
 
 <section id="projects" class="reveal">
   <h2 data-i18n="projects_title">Проекты</h2>
 
-  <div class="project">
+  <div class="card">
+    <h3 data-i18n="proj_shop_title">Apple Form</h3>
+    <div class="meta" data-i18n="proj_shop_meta">Интернет-магазин · в развитии</div>
+    <p data-i18n="proj_shop_desc">
+      Свой магазин по продаже устройств Apple. Развиваю онлайн-направление
+      и готовлю открытие физической точки. Опыт ремонта Apple-техники помогает
+      понимать продукт изнутри.
+    </p>
+    <div class="tags"><span>Apple</span><span>E-commerce</span><span>Retail</span></div>
+  </div>
+
+  <div class="card">
     <h3 data-i18n="proj1_title">Приложение для контроля диабета</h3>
     <div class="meta" data-i18n="proj1_meta">Android · Kotlin · pet-проект</div>
     <p data-i18n="proj1_desc">
-      Делаю инструмент, который помогает следить за глюкозой и инсулином.
-      Есть быстрый ввод данных, поддержка Libre и Medtronic, простые графики.
-      Пишу в первую очередь для себя, но стараюсь делать так, чтобы им было
-      удобно пользоваться и другим.
+      Инструмент для контроля глюкозы и инсулина: быстрый ввод, поддержка Libre
+      и Medtronic, графики. Делаю в первую очередь для себя.
     </p>
-    <div class="tags">
-      <span>Kotlin</span>
-      <span>Android</span>
-      <span>Health</span>
-    </div>
+    <div class="tags"><span>Kotlin</span><span>Android</span><span>Health</span></div>
   </div>
 
-  <div class="project">
-    <h3 data-i18n="proj2_title">Telegram-бот для учёта расходов</h3>
+  <div class="card">
+    <h3 data-i18n="proj2_title">Telegram-бот учёта расходов</h3>
     <div class="meta">Python · aiogram</div>
     <p data-i18n="proj2_desc">
-      Бот, в который просто пишешь сумму и категорию. В конце месяца можно
-      посмотреть, куда ушли деньги. Хранение в SQLite, без лишней сложности.
-      Пользуюсь сам.
+      Бот для учёта трат: сумма и категория текстом, статистика за месяц, SQLite.
     </p>
-    <div class="tags">
-      <span>Python</span>
-      <span>aiogram</span>
-      <span>SQLite</span>
-    </div>
+    <div class="tags"><span>Python</span><span>aiogram</span></div>
   </div>
 
-  <div class="project">
+  <div class="card">
     <h3 data-i18n="proj3_title">Трекер привычек</h3>
     <div class="meta" data-i18n="proj3_meta">SwiftUI · в процессе</div>
     <p data-i18n="proj3_desc">
-      Небольшое приложение, через которое учу SwiftUI, навигацию и работу с данными.
-      Хочу сделать так, чтобы оно нормально работало не только на iPhone,
-      но и на iPad и Mac.
+      Приложение для освоения SwiftUI. Цель — нормальная работа на iPhone, iPad и Mac.
     </p>
-    <div class="tags">
-      <span>Swift</span>
-      <span>SwiftUI</span>
-      <span>iOS / iPadOS / macOS</span>
-    </div>
+    <div class="tags"><span>Swift</span><span>SwiftUI</span></div>
   </div>
 
-  <div class="project">
-    <h3 data-i18n="proj4_title">Скрипты и мелкая автоматизация</h3>
-    <div class="meta">Python</div>
-    <p data-i18n="proj4_desc">
-      Разные утилиты под свои задачи: парсинг, обработка файлов, простая автоматизация.
-      Через них лучше понимаю язык и сразу применяю его на практике.
+  <div class="card">
+    <h3 data-i18n="proj_media_title">Медиа-проект</h3>
+    <div class="meta" data-i18n="proj_media_meta">YouTube · руководство</div>
+    <p data-i18n="proj_media_desc">
+      Участвовал в проектах NN на YouTube. Руководил собственным крупным
+      медиа-проектом: контент, команда, организация процессов.
     </p>
-    <div class="tags">
-      <span>Python</span>
-    </div>
+    <div class="tags"><span>Media</span><span>YouTube</span><span>Management</span></div>
+  </div>
+</section>
+
+<section id="security" class="reveal">
+  <h2 data-i18n="sec_title">Белый хакер</h2>
+  <p data-i18n="sec_intro">
+    Изучаю безопасность систем и тестирование на уязвимости. Важная часть —
+    психология и социальная инженерия: понимать, как люди принимают решения
+    и где возникают слабые места в процессах.
+  </p>
+
+  <div class="card">
+    <h3 data-i18n="sec1_title">Исследование безопасности</h3>
+    <div class="meta" data-i18n="sec1_meta">Практика · обучение</div>
+    <p data-i18n="sec1_desc">
+      Разбираю, как устроены системы, ищу типичные уязвимости, учусь мыслить
+      с позиции защиты и атаки (в легальных рамках).
+    </p>
+    <div class="tags"><span>Security</span><span>Pentest basics</span></div>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="sec2_title">Flipper Zero</h3>
+    <div class="meta" data-i18n="sec2_meta">Железо · C++</div>
+    <p data-i18n="sec2_desc">
+      Недавно приобрёл Flipper Zero. Самостоятельно паяю модули, параллельно
+      учу C++ и пишу небольшие программы под устройство.
+    </p>
+    <div class="tags"><span>Flipper Zero</span><span>C++</span><span>Hardware</span></div>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="sec3_title">Социальная инженерия</h3>
+    <div class="meta" data-i18n="sec3_meta">Психология · процессы</div>
+    <p data-i18n="sec3_desc">
+      Интересуюсь тем, как психология влияет на безопасность: доверие,
+      привычки, слабые звенья в коммуникации и организации.
+    </p>
+    <div class="tags"><span>Psychology</span><span>Social engineering</span></div>
   </div>
 </section>
 
 <section id="goals" class="reveal">
   <h2 data-i18n="goals_title">Что ищу</h2>
-  <div class="goals-box">
-    <h3 data-i18n="goals_h3">Открыт к интересным предложениям</h3>
+  <div class="card">
+    <h3 data-i18n="goals_h3">Открыт к сильным командам</h3>
     <p data-i18n="goals_p1">
-      Хочу работать в сильной команде над продуктами, которые реально используют люди.
-      Интересны крупные компании — Яндекс, VK и другие — где есть масштаб задач,
-      возможность расти и сильная инженерная культура.
+      Хочу работать над продуктами, которыми пользуются люди. Интересны
+      Яндекс, VK и другие компании с масштабом и инженерной культурой.
     </p>
     <p data-i18n="goals_p2">
-      Особенно близки направления, связанные с мобильной разработкой, внутренними
-      инструментами, автоматизацией и сервисами, где пересекаются Python и
-      клиентские технологии. Готов быстро учиться, брать ответственность и
-      работать в команде.
-    </p>
-    <p data-i18n="goals_p3">
-      Сейчас подтягиваю Python и Swift, учусь в Московском политехе и на курсах
-      вроде Яндекс Практикума, участвую в хакатонах и довожу pet-проекты до
-      рабочего состояния, чтобы было что показать.
+      Близки мобильная разработка, автоматизация, security и пересечение
+      Python с клиентскими технологиями. Готов учиться быстро и брать ответственность.
     </p>
   </div>
 </section>
 
-<section class="reveal">
-  <h2 data-i18n="hack_title">Хакатоны</h2>
-  <p data-i18n="hack_p1">
-    За 2025–2026 годы поучаствовал в нескольких онлайн-хакатонах. Команды
-    собирать было непросто, но хотя бы попробовал формат и понял, как быстро
-    собирать прототип и рассказывать о нём.
-  </p>
-  <p data-i18n="hack_p2">
-    Сейчас ищу людей, с кем можно поехать на офлайн-мероприятия в Москве.
-    Особенно интересны темы, связанные с мобильными приложениями, health-tech
-    и сервисами, которые реально помогают.
-  </p>
-</section>
-
 <section id="contact" class="contact reveal">
-  <h2 data-i18n="contact_title">Написать мне</h2>
-  <p data-i18n="contact_text">Если хочешь обсудить код, хакатоны, работу или просто поздороваться — пиши.</p>
+  <h2 data-i18n="contact_title">Связь</h2>
+  <p data-i18n="contact_text">Код, хакатоны, работа, security или просто поздороваться.</p>
   <div class="btns">
     <a class="btn primary" href="https://github.com/Koshalabeck" target="_blank">GitHub</a>
     <a class="btn" href="https://t.me/TheDarksideHack" target="_blank">Telegram</a>
-    <a class="btn" href="https://vk.com/id360488645" target="_blank">ВКонтакте</a>
+    <a class="btn" href="https://vk.com/id360488645" target="_blank">VK</a>
     <a class="btn" href="https://steamcommunity.com/id/koshalabeck/" target="_blank">Steam</a>
     <a class="btn" href="https://x.com/Scrillex_MMK" target="_blank">X</a>
   </div>
 </section>
 
 <footer data-i18n="footer">© 2026 Ивахненко Кирилл Дмитриевич</footer>
-
 </div>
 
 <script>
-  const translations = {
-    ru: {
-      nav_about: 'обо мне',
-      nav_projects: 'проекты',
-      nav_goals: 'цели',
-      nav_contact: 'связь',
-      badge: 'Москва',
-      name: 'Ивахненко Кирилл Дмитриевич',
-      hero_text: 'Занимаюсь Python и разработкой под экосистему Apple.<br>Делаю свои проекты, учусь и ищу интересную работу.',
-      btn_projects: 'Смотреть проекты',
-      about_title: 'О себе',
-      about_p1: 'Живу в Москве. Получаю образование в Московском политехническом университете. Параллельно прохожу курсы в Яндекс Практикуме и другие образовательные программы, чтобы системно закрывать пробелы и быстрее расти как разработчик.',
-      about_p2: 'Долгое время работал в Т-Банке на разных должностях. Этот опыт дал понимание, как устроены крупные компании, как строится коммуникация и почему важно доводить задачи до результата. Сейчас основной фокус — Python и разработка под экосистему Apple: iOS, iPadOS, macOS и tvOS.',
-      about_p3: 'Мне нравится, когда то, что пишешь, действительно помогает. Один из проектов, которым занимаюсь дольше остальных — приложение для людей с диабетом. Пока оно на Android, но думаю и про версии под Apple.',
-      about_p4: 'Увлекаюсь работой с техникой, люблю нестандартные инженерные подходы к задачам. В свободное время играю в компьютерных клубах, в том числе в Counter-Strike, занимаюсь музыкой, моушен-графикой и работаю в Blender. Участвую в тендерах и люблю работать со студентами — объяснять, разбирать задачи и смотреть, как человек начинает понимать.',
-      about_p5: 'Хакатоны воспринимаю как хороший способ быстро прокачаться и познакомиться с людьми. Уже участвовал в нескольких онлайн-форматах. Сейчас хочу найти команду и попробовать что-то офлайн в Москве.',
-      skills_title: 'Чем занимаюсь',
-      skill_motion: 'Моушен-графика',
-      skill_music: 'Музыка',
-      skills_note: 'Основное внимание сейчас уделяю Python и Swift. Kotlin использую в текущем pet-проекте. Blender и моушен-графика — для визуальных задач. Остальное — по необходимости и интересам.',
-      projects_title: 'Проекты',
-      proj1_title: 'Приложение для контроля диабета',
-      proj1_meta: 'Android · Kotlin · pet-проект',
-      proj1_desc: 'Делаю инструмент, который помогает следить за глюкозой и инсулином. Есть быстрый ввод данных, поддержка Libre и Medtronic, простые графики. Пишу в первую очередь для себя, но стараюсь делать так, чтобы им было удобно пользоваться и другим.',
-      proj2_title: 'Telegram-бот для учёта расходов',
-      proj2_desc: 'Бот, в который просто пишешь сумму и категорию. В конце месяца можно посмотреть, куда ушли деньги. Хранение в SQLite, без лишней сложности. Пользуюсь сам.',
-      proj3_title: 'Трекер привычек',
-      proj3_meta: 'SwiftUI · в процессе',
-      proj3_desc: 'Небольшое приложение, через которое учу SwiftUI, навигацию и работу с данными. Хочу сделать так, чтобы оно нормально работало не только на iPhone, но и на iPad и Mac.',
-      proj4_title: 'Скрипты и мелкая автоматизация',
-      proj4_desc: 'Разные утилиты под свои задачи: парсинг, обработка файлов, простая автоматизация. Через них лучше понимаю язык и сразу применяю его на практике.',
-      goals_title: 'Что ищу',
-      goals_h3: 'Открыт к интересным предложениям',
-      goals_p1: 'Хочу работать в сильной команде над продуктами, которые реально используют люди. Интересны крупные компании — Яндекс, VK и другие — где есть масштаб задач, возможность расти и сильная инженерная культура.',
-      goals_p2: 'Особенно близки направления, связанные с мобильной разработкой, внутренними инструментами, автоматизацией и сервисами, где пересекаются Python и клиентские технологии. Готов быстро учиться, брать ответственность и работать в команде.',
-      goals_p3: 'Сейчас подтягиваю Python и Swift, учусь в Московском политехе и на курсах вроде Яндекс Практикума, участвую в хакатонах и довожу pet-проекты до рабочего состояния, чтобы было что показать.',
-      hack_title: 'Хакатоны',
-      hack_p1: 'За 2025–2026 годы поучаствовал в нескольких онлайн-хакатонах. Команды собирать было непросто, но хотя бы попробовал формат и понял, как быстро собирать прототип и рассказывать о нём.',
-      hack_p2: 'Сейчас ищу людей, с кем можно поехать на офлайн-мероприятия в Москве. Особенно интересны темы, связанные с мобильными приложениями, health-tech и сервисами, которые реально помогают.',
-      contact_title: 'Написать мне',
-      contact_text: 'Если хочешь обсудить код, хакатоны, работу или просто поздороваться — пиши.',
-      footer: '© 2026 Ивахненко Кирилл Дмитриевич'
-    },
-    en: {
-      nav_about: 'about',
-      nav_projects: 'projects',
-      nav_goals: 'goals',
-      nav_contact: 'contact',
-      badge: 'Moscow',
-      name: 'Kirill Dmitrievich Ivakhnenko',
-      hero_text: 'I work with Python and develop for the Apple ecosystem.<br>I build my own projects, study and look for interesting opportunities.',
-      btn_projects: 'View projects',
-      about_title: 'About me',
-      about_p1: 'I live in Moscow. I am studying at Moscow Polytechnic University. In parallel I take courses at Yandex Practicum and other educational programs to systematically fill the gaps and grow faster as a developer.',
-      about_p2: 'For a long time I worked at T-Bank in various roles. That experience gave me an understanding of how large companies work, how communication is built and why it is important to deliver results. Right now my main focus is Python and development for the Apple ecosystem: iOS, iPadOS, macOS and tvOS.',
-      about_p3: 'I like it when what I write actually helps people. One of the projects I have been working on the longest is an app for people with diabetes. Right now it is on Android, but I am also thinking about Apple versions.',
-      about_p4: 'I am into working with technology and prefer non-standard engineering approaches to problems. In my free time I play at computer clubs, including Counter-Strike, do music and motion graphics, and work in Blender. I take part in tenders and enjoy working with students — explaining things, breaking down tasks and watching someone start to get it.',
-      about_p5: 'I see hackathons as a good way to level up quickly and meet people. I have already joined several online ones. Now I want to find a team and try something offline in Moscow.',
-      skills_title: 'What I do',
-      skill_motion: 'Motion graphics',
-      skill_music: 'Music',
-      skills_note: 'Right now my main focus is Python and Swift. I use Kotlin in my current pet project. Blender and motion graphics are for visual tasks. Everything else is as needed or out of interest.',
-      projects_title: 'Projects',
-      proj1_title: 'Diabetes control app',
-      proj1_meta: 'Android · Kotlin · pet project',
-      proj1_desc: 'I am building a tool that helps track glucose and insulin. It has fast data entry, support for Libre and Medtronic, and simple charts. I write it primarily for myself, but try to make it convenient for others as well.',
-      proj2_title: 'Expense tracking Telegram bot',
-      proj2_desc: 'A bot where you just type the amount and category. At the end of the month you can see where the money went. Stored in SQLite, no extra complexity. I use it myself.',
-      proj3_title: 'Habit tracker',
-      proj3_meta: 'SwiftUI · in progress',
-      proj3_desc: 'A small app through which I learn SwiftUI, navigation and data handling. I want it to work well not only on iPhone, but also on iPad and Mac.',
-      proj4_title: 'Scripts and small automation',
-      proj4_desc: 'Various utilities for my own tasks: parsing, file processing, simple automation. They help me understand the language better and apply it right away.',
-      goals_title: 'What I am looking for',
-      goals_h3: 'Open to interesting offers',
-      goals_p1: 'I want to work in a strong team on products that people actually use. I am interested in large companies — Yandex, VK and others — where there is scale, room to grow and a solid engineering culture.',
-      goals_p2: 'I am especially drawn to mobile development, internal tools, automation and services where Python and client-side technologies meet. I am ready to learn fast, take responsibility and work as part of a team.',
-      goals_p3: 'Right now I am improving my Python and Swift, studying at Moscow Polytechnic and on courses like Yandex Practicum, taking part in hackathons and bringing pet projects to a working state so I have something to show.',
-      hack_title: 'Hackathons',
-      hack_p1: 'In 2025–2026 I took part in several online hackathons. Assembling teams was not easy, but at least I tried the format and learned how to quickly build a prototype and present it.',
-      hack_p2: 'Now I am looking for people to go to offline events in Moscow with. I am especially interested in topics related to mobile apps, health-tech and services that actually help people.',
-      contact_title: 'Get in touch',
-      contact_text: 'If you want to talk about code, hackathons, work or just say hi — write me.',
-      footer: '© 2026 Kirill Dmitrievich Ivakhnenko'
-    }
-  };
-
-  function setLang(lang) {
-    localStorage.setItem('lang', lang);
-    document.documentElement.lang = lang;
-    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[lang][key]) el.innerHTML = translations[lang][key];
-    });
-    document.title = translations[lang].name;
+const translations = {
+  ru: {
+    nav_about: 'обо мне', nav_projects: 'проекты', nav_security: 'security',
+    nav_goals: 'цели', nav_contact: 'связь',
+    badge: 'Москва', name: 'Ивахненко Кирилл Дмитриевич',
+    hero_text: 'Python, экосистема Apple, безопасность систем.<br>Свои проекты, учёба, бизнес и поиск сильной команды.',
+    btn_projects: 'Смотреть проекты',
+    about_title: 'О себе',
+    about_p1: 'Живу в Москве. Получаю образование в Московском политехническом университете. Параллельно прохожу курсы в Яндекс Практикуме и другие программы, чтобы системно закрывать пробелы и быстрее расти.',
+    about_p2: 'Долгое время работал в Т-Банке на разных должностях — это дало понимание, как устроены крупные компании и почему важно доводить задачи до результата. Сейчас основной фокус: Python, разработка под Apple (iOS, iPadOS, macOS, tvOS) и изучение безопасности систем.',
+    about_p3: 'Занимался ремонтом техники Apple. Сейчас развиваю свой интернет-магазин <strong>Apple Form</strong> по продаже устройств Apple и готовлю открытие физической точки.',
+    about_p4: 'В свободное время играю музыку в клубах, занимаюсь 3D и моушен-графикой, работаю в Blender. Увлекаюсь мотоспортом, морскими судами — в частности катерами — и люблю быстрые машины. Не только «головой»: пилю лобзиком, выжигаю по дереву и делаю ручную работу.',
+    about_p5: 'Участвовал в проектах NN на YouTube, руководил собственным крупным медиа-проектом. Участвую в тендерах, люблю работать со студентами. Хакатоны — способ быстро прокачаться и найти сильную команду.',
+    langs_title: 'Языки',
+    lang_ru_name: 'Русский', lang_ru_level: 'отлично (C2)',
+    lang_en_name: 'English', lang_en_level: 'средний (B1–B2)',
+    qualities_title: 'Качества',
+    q1_t: 'Пунктуальность', q1_d: 'Сроки и договорённости соблюдаю',
+    q2_t: 'Ответственность', q2_d: 'Довожу задачи до результата',
+    q3_t: 'Быстрая обучаемость', q3_d: 'Новые инструменты осваиваю на практике',
+    q4_t: 'Инженерный подход', q4_d: 'Люблю нестандартные, рабочие решения',
+    skills_title: 'Навыки и интересы',
+    skill_3d: '3D / моушен', skill_sec: 'Security',
+    projects_title: 'Проекты',
+    proj_shop_title: 'Apple Form', proj_shop_meta: 'Интернет-магазин · в развитии',
+    proj_shop_desc: 'Свой магазин по продаже устройств Apple. Развиваю онлайн-направление и готовлю открытие физической точки. Опыт ремонта Apple-техники помогает понимать продукт изнутри.',
+    proj1_title: 'Приложение для контроля диабета', proj1_meta: 'Android · Kotlin · pet-проект',
+    proj1_desc: 'Инструмент для контроля глюкозы и инсулина: быстрый ввод, поддержка Libre и Medtronic, графики. Делаю в первую очередь для себя.',
+    proj2_title: 'Telegram-бот учёта расходов',
+    proj2_desc: 'Бот для учёта трат: сумма и категория текстом, статистика за месяц, SQLite.',
+    proj3_title: 'Трекер привычек', proj3_meta: 'SwiftUI · в процессе',
+    proj3_desc: 'Приложение для освоения SwiftUI. Цель — нормальная работа на iPhone, iPad и Mac.',
+    proj_media_title: 'Медиа-проект', proj_media_meta: 'YouTube · руководство',
+    proj_media_desc: 'Участвовал в проектах NN на YouTube. Руководил собственным крупным медиа-проектом: контент, команда, организация процессов.',
+    sec_title: 'Белый хакер',
+    sec_intro: 'Изучаю безопасность систем и тестирование на уязвимости. Важная часть — психология и социальная инженерия: понимать, как люди принимают решения и где возникают слабые места в процессах.',
+    sec1_title: 'Исследование безопасности', sec1_meta: 'Практика · обучение',
+    sec1_desc: 'Разбираю, как устроены системы, ищу типичные уязвимости, учусь мыслить с позиции защиты и атаки (в легальных рамках).',
+    sec2_title: 'Flipper Zero', sec2_meta: 'Железо · C++',
+    sec2_desc: 'Недавно приобрёл Flipper Zero. Самостоятельно паяю модули, параллельно учу C++ и пишу небольшие программы под устройство.',
+    sec3_title: 'Социальная инженерия', sec3_meta: 'Психология · процессы',
+    sec3_desc: 'Интересуюсь тем, как психология влияет на безопасность: доверие, привычки, слабые звенья в коммуникации и организации.',
+    goals_title: 'Что ищу', goals_h3: 'Открыт к сильным командам',
+    goals_p1: 'Хочу работать над продуктами, которыми пользуются люди. Интересны Яндекс, VK и другие компании с масштабом и инженерной культурой.',
+    goals_p2: 'Близки мобильная разработка, автоматизация, security и пересечение Python с клиентскими технологиями. Готов учиться быстро и брать ответственность.',
+    contact_title: 'Связь',
+    contact_text: 'Код, хакатоны, работа, security или просто поздороваться.',
+    footer: '© 2026 Ивахненко Кирилл Дмитриевич'
+  },
+  en: {
+    nav_about: 'about', nav_projects: 'projects', nav_security: 'security',
+    nav_goals: 'goals', nav_contact: 'contact',
+    badge: 'Moscow', name: 'Kirill Dmitrievich Ivakhnenko',
+    hero_text: 'Python, Apple ecosystem, systems security.<br>Own projects, studies, business and looking for a strong team.',
+    btn_projects: 'View projects',
+    about_title: 'About me',
+    about_p1: 'I live in Moscow. I study at Moscow Polytechnic University. In parallel I take courses at Yandex Practicum and other programs to systematically close gaps and grow faster.',
+    about_p2: 'For a long time I worked at T-Bank in different roles — that taught me how large companies work and why delivering results matters. My main focus now is Python, Apple development (iOS, iPadOS, macOS, tvOS) and systems security.',
+    about_p3: 'I repaired Apple devices. Now I am building my online store <strong>Apple Form</strong> selling Apple products and preparing to open a physical location.',
+    about_p4: 'In my free time I play music in clubs, do 3D and motion graphics in Blender. I am into motorsport, boats, and fast cars. I also work with my hands: jigsaw, wood burning and similar craft work.',
+    about_p5: 'I took part in NN projects on YouTube and led my own large media project. I participate in tenders and enjoy working with students. Hackathons help me level up and find a strong team.',
+    langs_title: 'Languages',
+    lang_ru_name: 'Russian', lang_ru_level: 'excellent (C2)',
+    lang_en_name: 'English', lang_en_level: 'intermediate (B1–B2)',
+    qualities_title: 'Strengths',
+    q1_t: 'Punctuality', q1_d: 'I respect deadlines and agreements',
+    q2_t: 'Responsibility', q2_d: 'I finish what I start',
+    q3_t: 'Fast learning', q3_d: 'I pick up new tools by doing',
+    q4_t: 'Engineering mindset', q4_d: 'I like non-standard solutions that work',
+    skills_title: 'Skills & interests',
+    skill_3d: '3D / motion', skill_sec: 'Security',
+    projects_title: 'Projects',
+    proj_shop_title: 'Apple Form', proj_shop_meta: 'Online store · in progress',
+    proj_shop_desc: 'My store selling Apple devices. Growing the online channel and preparing a physical shop. Repair experience helps me understand the product from the inside.',
+    proj1_title: 'Diabetes control app', proj1_meta: 'Android · Kotlin · pet project',
+    proj1_desc: 'A tool to track glucose and insulin: fast input, Libre and Medtronic support, charts. Built primarily for myself.',
+    proj2_title: 'Expense tracking Telegram bot',
+    proj2_desc: 'A bot for expenses: amount and category by text, monthly stats, SQLite.',
+    proj3_title: 'Habit tracker', proj3_meta: 'SwiftUI · in progress',
+    proj3_desc: 'An app to learn SwiftUI. Goal: solid experience on iPhone, iPad and Mac.',
+    proj_media_title: 'Media project', proj_media_meta: 'YouTube · leadership',
+    proj_media_desc: 'Took part in NN projects on YouTube. Led my own large media project: content, team and process.',
+    sec_title: 'White hat',
+    sec_intro: 'I study systems security and vulnerability testing. Psychology and social engineering matter a lot: how people decide and where process weak points appear.',
+    sec1_title: 'Security research', sec1_meta: 'Practice · learning',
+    sec1_desc: 'I break down how systems work, look for common vulnerabilities and learn to think both as defender and attacker — within legal limits.',
+    sec2_title: 'Flipper Zero', sec2_meta: 'Hardware · C++',
+    sec2_desc: 'I recently got a Flipper Zero. I solder modules myself and learn C++ while writing small programs for the device.',
+    sec3_title: 'Social engineering', sec3_meta: 'Psychology · processes',
+    sec3_desc: 'I am interested in how psychology affects security: trust, habits and weak links in communication and organization.',
+    goals_title: 'What I look for', goals_h3: 'Open to strong teams',
+    goals_p1: 'I want to work on products people actually use. Interested in Yandex, VK and other companies with scale and engineering culture.',
+    goals_p2: 'Drawn to mobile development, automation, security and where Python meets client tech. Ready to learn fast and take ownership.',
+    contact_title: 'Contact',
+    contact_text: 'Code, hackathons, work, security — or just say hi.',
+    footer: '© 2026 Kirill Dmitrievich Ivakhnenko'
   }
+};
 
-  const saved = localStorage.getItem('lang') || 'ru';
-  setLang(saved);
-
-  // matrix
-  const canvas = document.getElementById('matrix');
-  const ctx = canvas.getContext('2d');
-  function resizeMatrix() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeMatrix();
-  window.addEventListener('resize', resizeMatrix);
-  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const fontSize = 14;
-  let columns = Math.floor(canvas.width / fontSize);
-  let drops = Array(columns).fill(1);
-  function drawMatrix() {
-    ctx.fillStyle = 'rgba(9, 9, 11, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#22c55e';
-    ctx.font = fontSize + 'px monospace';
-    for (let i = 0; i < drops.length; i++) {
-      const text = chars[Math.floor(Math.random() * chars.length)];
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
-    }
-  }
-  setInterval(drawMatrix, 40);
-
-  // cursor
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
-    const p = document.createElement('div');
-    p.className = 'trail-particle';
-    const size = 4 + Math.random() * 6;
-    p.style.width = size + 'px';
-    p.style.height = size + 'px';
-    p.style.left = mouseX + 'px';
-    p.style.top = mouseY + 'px';
-    p.style.background = `rgba(${129 + Math.random()*50}, ${140 + Math.random()*40}, 248, ${0.4 + Math.random()*0.4})`;
-    p.style.transform = 'translate(-50%, -50%)';
-    document.body.appendChild(p);
-    let opacity = 1, scale = 1;
-    const fade = setInterval(() => {
-      opacity -= 0.04; scale += 0.03;
-      p.style.opacity = opacity;
-      p.style.transform = `translate(-50%, -50%) scale(${scale})`;
-      if (opacity <= 0) { clearInterval(fade); p.remove(); }
-    }, 16);
+function setLang(lang) {
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (translations[lang][k]) el.innerHTML = translations[lang][k];
   });
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.15;
-    ringY += (mouseY - ringY) * 0.15;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
-    requestAnimationFrame(animateRing);
+  document.title = translations[lang].name;
+}
+setLang(localStorage.getItem('lang') || 'ru');
+
+// matrix
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+function resizeMatrix() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeMatrix();
+window.addEventListener('resize', resizeMatrix);
+const chars = '01アイウエオカキクケコサシスセソタチツテトABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const fontSize = 14;
+let drops = [];
+function resetDrops() {
+  drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
+}
+resetDrops();
+window.addEventListener('resize', resetDrops);
+setInterval(() => {
+  ctx.fillStyle = 'rgba(9,9,11,0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#22c55e';
+  ctx.font = fontSize + 'px monospace';
+  for (let i = 0; i < drops.length; i++) {
+    ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
   }
-  animateRing();
-  document.querySelectorAll('a, .btn, .skill, .project, .lang-switch button').forEach(el => {
-    el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
-    el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
-  });
+}, 40);
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// cursor (desktop)
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  const p = document.createElement('div');
+  p.className = 'trail-particle';
+  const s = 4 + Math.random() * 6;
+  p.style.cssText = `width:${s}px;height:${s}px;left:${mx}px;top:${my}px;background:rgba(${129+Math.random()*50},${140+Math.random()*40},248,${0.35+Math.random()*0.4});transform:translate(-50%,-50%)`;
+  document.body.appendChild(p);
+  let o = 1, sc = 1;
+  const t = setInterval(() => {
+    o -= 0.04; sc += 0.03;
+    p.style.opacity = o;
+    p.style.transform = `translate(-50%,-50%) scale(${sc})`;
+    if (o <= 0) { clearInterval(t); p.remove(); }
+  }, 16);
+});
+(function anim() {
+  rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a, .btn, .skill, .card, .quality, .lang-switch button').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+});
 
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const el = document.querySelector(link.getAttribute('href'));
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    });
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
   });
+});
 </script>
-
 </body>
 </html>

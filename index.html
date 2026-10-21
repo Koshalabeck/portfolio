@@ -28,8 +28,33 @@ body {
 
 #matrix {
   position: fixed; inset: 0; z-index: 0;
-  opacity: .14; pointer-events: none;
+  opacity: .12; pointer-events: none;
 }
+.blobs {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  opacity: .35; animation: floatBlob 18s ease-in-out infinite;
+}
+.blob-1 {
+  width: 420px; height: 420px; background: #4f46e5;
+  top: -10%; left: -8%; animation-delay: 0s;
+}
+.blob-2 {
+  width: 360px; height: 360px; background: #059669;
+  bottom: 10%; right: -10%; animation-delay: -6s;
+}
+.blob-3 {
+  width: 280px; height: 280px; background: #7c3aed;
+  top: 45%; left: 55%; animation-delay: -12s; opacity: .22;
+}
+@keyframes floatBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.08); }
+  66% { transform: translate(-25px, 20px) scale(0.95); }
+}
+
 .content { position: relative; z-index: 1; }
 
 .cursor-dot, .cursor-ring, .trail-particle { display: none; }
@@ -66,14 +91,30 @@ nav {
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
-.logo { font-weight: 650; font-size: 1.05rem; letter-spacing: -.02em; }
+.logo {
+  font-weight: 650; font-size: 1.05rem; letter-spacing: -.02em;
+  background: linear-gradient(90deg, #a5b4fc, #34d399, #a5b4fc);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
 nav .right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 nav .links { display: flex; flex-wrap: wrap; gap: 4px 0; }
 nav .links a {
   color: var(--muted); font-size: .82rem; margin-left: 12px;
-  transition: color .2s;
+  transition: color .2s; position: relative;
+}
+nav .links a::after {
+  content: ''; position: absolute; left: 0; bottom: -3px;
+  width: 0; height: 1.5px; background: var(--accent);
+  transition: width .25s ease;
 }
 nav .links a:hover { color: var(--text); text-decoration: none; }
+nav .links a:hover::after { width: 100%; }
 
 .lang-switch {
   display: flex; border: 1px solid var(--border); border-radius: 8px;
@@ -82,6 +123,7 @@ nav .links a:hover { color: var(--text); text-decoration: none; }
 .lang-switch button {
   background: transparent; border: none; color: var(--muted);
   font-size: .75rem; padding: 5px 9px; cursor: pointer; font-weight: 500;
+  transition: all .2s;
 }
 .lang-switch button.active { background: var(--accent); color: #09090b; }
 
@@ -95,6 +137,7 @@ nav .links a:hover { color: var(--text); text-decoration: none; }
   margin-bottom: 16px; font-weight: 500;
   opacity: 0; transform: translateY(12px);
   animation: fadeUp .6s ease forwards .1s;
+  box-shadow: 0 0 24px rgba(129,140,248,.15);
 }
 .hero h1 {
   font-size: clamp(1.9rem, 5.5vw, 2.9rem);
@@ -118,15 +161,21 @@ nav .links a:hover { color: var(--text); text-decoration: none; }
   display: inline-flex; align-items: center; padding: 10px 16px;
   border-radius: 10px; font-size: .9rem; font-weight: 500;
   border: 1px solid var(--border); color: var(--text);
-  background: transparent; transition: all .2s;
+  background: transparent; transition: all .25s;
+  position: relative; overflow: hidden;
 }
 .btn.primary {
   background: var(--accent); color: #09090b; border-color: var(--accent);
+  box-shadow: 0 0 0 rgba(129,140,248,0);
+}
+.btn.primary:hover {
+  background: #a5b4fc;
+  box-shadow: 0 8px 28px rgba(129,140,248,.35);
+  transform: translateY(-3px);
 }
 .btn:hover {
   border-color: #3f3f46; text-decoration: none; transform: translateY(-2px);
 }
-.btn.primary:hover { background: #a5b4fc; }
 
 section {
   max-width: 760px; margin: 0 auto; padding: 48px 20px;
@@ -134,13 +183,18 @@ section {
 h2 {
   font-size: 1.35rem; font-weight: 650; margin-bottom: 20px;
   letter-spacing: -.02em;
+  display: flex; align-items: center; gap: 12px;
+}
+h2::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
 }
 p { color: var(--muted); margin-bottom: 14px; font-size: 1.02rem; }
 p strong { color: var(--text); }
 
 .reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity .65s ease, transform .65s ease;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -148,28 +202,41 @@ p strong { color: var(--text); }
 .skill {
   background: var(--card); border: 1px solid var(--border);
   padding: 7px 14px; border-radius: 20px; font-size: .88rem;
-  color: #d4d4d8; transition: all .2s;
+  color: #d4d4d8; transition: all .25s;
 }
-.skill:hover { border-color: var(--accent); transform: translateY(-2px); }
+.skill:hover {
+  border-color: var(--accent); transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(129,140,248,.12);
+}
 
 .card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 14px; padding: 20px 22px; margin-bottom: 12px;
-  transition: all .25s;
+  transition: all .3s cubic-bezier(.22,1,.36,1);
+  position: relative; overflow: hidden;
 }
-.card:hover { border-color: #2e2e36; transform: translateY(-3px); }
+.card::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.03), transparent);
+  transition: left .5s ease;
+}
+.card:hover::before { left: 120%; }
+.card:hover {
+  border-color: #3a3a48; transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+}
 .card h3 { font-size: 1.08rem; margin-bottom: 4px; }
 .card .meta { font-size: .78rem; color: #71717a; margin-bottom: 10px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .tags span {
   font-size: .72rem; background: #1c1c22; color: #a1a1aa;
   padding: 3px 9px; border-radius: 6px;
+  transition: background .2s, color .2s;
 }
+.card:hover .tags span { background: #252530; color: #c4c4cc; }
 
 .grid2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  display: grid; grid-template-columns: 1fr; gap: 12px;
 }
 @media (min-width: 560px) {
   .grid2 { grid-template-columns: 1fr 1fr; }
@@ -178,24 +245,32 @@ p strong { color: var(--text); }
 .quality {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; padding: 14px 16px;
-  transition: border-color .2s, transform .2s;
+  transition: all .25s;
 }
-.quality:hover { border-color: var(--accent); transform: translateY(-2px); }
+.quality:hover {
+  border-color: var(--accent); transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(129,140,248,.1);
+}
 .quality b { display: block; font-size: .95rem; margin-bottom: 4px; }
 .quality span { font-size: .88rem; color: var(--muted); }
 
-.lang-row {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
-}
+.lang-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
 .lang-pill {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; padding: 12px 16px; min-width: 140px;
+  transition: all .25s;
+}
+.lang-pill:hover {
+  border-color: var(--accent2); transform: translateY(-2px);
 }
 .lang-pill b { display: block; font-size: .9rem; margin-bottom: 2px; }
 .lang-pill span { font-size: .82rem; color: var(--muted); }
 
 .contact { text-align: center; padding-bottom: 40px; }
-.contact .btns { justify-content: center; margin-top: 20px; opacity: 1; transform: none; animation: none; }
+.contact .btns {
+  justify-content: center; margin-top: 20px;
+  opacity: 1; transform: none; animation: none;
+}
 
 footer {
   text-align: center; padding: 16px 16px 48px;
@@ -211,12 +286,23 @@ footer {
   .hero { padding: 100px 16px 48px; }
   section { padding: 40px 16px; }
   .btn { padding: 9px 14px; font-size: .85rem; }
+  .blob { opacity: .2; filter: blur(60px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blob, .logo { animation: none; }
+  .reveal { transition: none; opacity: 1; transform: none; }
 }
 </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
+<div class="blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -226,11 +312,11 @@ footer {
   <div class="logo">КИ</div>
   <div class="right">
     <div class="links">
-      <a href="#about" data-i18n="nav_about">обо мне</a>
-      <a href="#projects" data-i18n="nav_projects">проекты</a>
-      <a href="#security" data-i18n="nav_security">security</a>
-      <a href="#goals" data-i18n="nav_goals">цели</a>
-      <a href="#contact" data-i18n="nav_contact">связь</a>
+      <a href="#about" data-i18n="nav_about">Обо мне</a>
+      <a href="#projects" data-i18n="nav_projects">Проекты</a>
+      <a href="#security" data-i18n="nav_security">Security</a>
+      <a href="#goals" data-i18n="nav_goals">Цели</a>
+      <a href="#contact" data-i18n="nav_contact">Связь</a>
     </div>
     <div class="lang-switch">
       <button id="btn-ru" class="active" onclick="setLang('ru')">RU</button>
@@ -460,8 +546,8 @@ footer {
 <script>
 const translations = {
   ru: {
-    nav_about: 'обо мне', nav_projects: 'проекты', nav_security: 'security',
-    nav_goals: 'цели', nav_contact: 'связь',
+    nav_about: 'Обо мне', nav_projects: 'Проекты', nav_security: 'Security',
+    nav_goals: 'Цели', nav_contact: 'Связь',
     badge: 'Москва', name: 'Ивахненко Кирилл Дмитриевич',
     hero_text: 'Python, экосистема Apple, безопасность систем.<br>Свои проекты, учёба, бизнес и поиск сильной команды.',
     btn_projects: 'Смотреть проекты',
@@ -508,8 +594,8 @@ const translations = {
     footer: '© 2026 Ивахненко Кирилл Дмитриевич'
   },
   en: {
-    nav_about: 'about', nav_projects: 'projects', nav_security: 'security',
-    nav_goals: 'goals', nav_contact: 'contact',
+    nav_about: 'About', nav_projects: 'Projects', nav_security: 'Security',
+    nav_goals: 'Goals', nav_contact: 'Contact',
     badge: 'Moscow', name: 'Kirill Dmitrievich Ivakhnenko',
     hero_text: 'Python, Apple ecosystem, systems security.<br>Own projects, studies, business and looking for a strong team.',
     btn_projects: 'View projects',
@@ -570,7 +656,6 @@ function setLang(lang) {
 }
 setLang(localStorage.getItem('lang') || 'ru');
 
-// matrix
 const canvas = document.getElementById('matrix');
 const ctx = canvas.getContext('2d');
 function resizeMatrix() {
@@ -599,7 +684,6 @@ setInterval(() => {
   }
 }, 40);
 
-// cursor (desktop)
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 let mx = -100, my = -100, rx = -100, ry = -100;
@@ -624,7 +708,7 @@ document.addEventListener('mousemove', e => {
   ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
   requestAnimationFrame(anim);
 })();
-document.querySelectorAll('a, .btn, .skill, .card, .quality, .lang-switch button').forEach(el => {
+document.querySelectorAll('a, .btn, .skill, .card, .quality, .lang-pill, .lang-switch button').forEach(el => {
   el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
   el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
 });

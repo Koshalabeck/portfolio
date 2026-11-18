@@ -9,8 +9,9 @@ const translations = {
     nav_contact: "Связь",
     nav_label: "Разделы",
     badge: "Москва · Политех",
+    name_first: "Кирилл",
     name_last: "Ивахненко",
-    name_rest: "Кирилл Дмитриевич",
+    name_patronymic: "Дмитриевич",
     hero_text: "Python, экосистема Apple и интерфейсы, которые можно открыть. Учёба, свои продукты и поиск сильной команды. Go пока учу — честно, без готового коммерческого опыта.",
     btn_projects: "Смотреть проекты",
     pill_edu: "Московский Политех · с 2023",
@@ -122,7 +123,6 @@ const translations = {
     goals_p2: "К стажировке в Яндексе иду через учёбу, в том числе изучаю Go. Близки мобильная разработка, автоматизация, безопасность и место, где Python встречается с клиентскими технологиями. Готов учиться быстро и брать ответственность.",
     contact_title: "Связь",
     contact_text: "Код, хакатоны, работа, учёба или просто поздороваться.",
-    email_todo: "Почта — впиши адрес, когда будет готов. Ссылку не выдумывал.",
     footer: "© 2026 Ивахненко Кирилл Дмитриевич",
     title: "Ивахненко Кирилл Дмитриевич"
   },
@@ -136,8 +136,9 @@ const translations = {
     nav_contact: "Contact",
     nav_label: "Sections",
     badge: "Moscow · Polytech",
+    name_first: "Kirill",
     name_last: "Ivakhnenko",
-    name_rest: "Kirill Dmitrievich",
+    name_patronymic: "Dmitrievich",
     hero_text: "Python, the Apple ecosystem, and interfaces I can actually open. Studies, my own products, and a search for a strong team. I am learning Go — honestly, with no production experience yet.",
     btn_projects: "View projects",
     pill_edu: "Moscow Polytech · since 2023",
@@ -249,7 +250,6 @@ const translations = {
     goals_p2: "I am walking toward a Yandex internship through study, including learning Go. I am drawn to mobile development, automation, security, and the place where Python meets client tech. I can learn fast and take ownership.",
     contact_title: "Contact",
     contact_text: "Code, hackathons, work, studies — or just say hello.",
-    email_todo: "Email — add the address when it is ready. It is not invented here.",
     footer: "© 2026 Kirill Dmitrievich Ivakhnenko",
     title: "Kirill Dmitrievich Ivakhnenko"
   }

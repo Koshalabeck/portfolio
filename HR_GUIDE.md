@@ -20,7 +20,7 @@
 4. **Проекты.** iForm со скриншотами: главная, каталог, товар, корзина, компьютер и телефон. Дальше гайд по iPod nano 7, форк webview-shell-ios и пет-проекты со старой страницы.
 5. **Опыт.** Учёба, Практикум, Go, Т-Банк, магазин, медиа, тендеры, студенты. Рядом блок про безопасность.
 6. **Что ищу.** Сильная команда, интерес к Яндексу и VK.
-7. **Связь.** GitHub, Telegram, VK, X, Steam. Почта помечена **TODO**: адрес Кирилл допишет сам, его здесь нет.
+7. **Связь.** GitHub, Telegram, VK, X, Steam и почта [kivahnenkok@gmail.com](mailto:kivahnenkok@gmail.com).
 
 ## С телефона
 
@@ -59,7 +59,7 @@ The page opens in Russian. **RU / EN** sits in the header.
 4. **Projects.** iForm with screenshots: home, catalog, product, cart, desktop and phone. Then the iPod nano 7 guide, the webview-shell-ios fork, and pet projects from the previous page.
 5. **Experience.** Studies, Practicum, Go, T-Bank, the store, media, tenders, students. A security block sits beside it.
 6. **What he is looking for.** A strong team, interest in Yandex and VK.
-7. **Contact.** GitHub, Telegram, VK, X, Steam. Email is marked **TODO**: Kirill will add the address himself. It is not on the page.
+7. **Contact.** GitHub, Telegram, VK, X, Steam, and email [kivahnenkok@gmail.com](mailto:kivahnenkok@gmail.com).
 
 ## On a phone
 
